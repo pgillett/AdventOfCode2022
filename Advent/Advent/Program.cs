@@ -22,6 +22,13 @@ class Program
             Output(1, 1, "Elf with max", day1.ElfWithMost(InputData.Day01Elves));
             Output(1, 2, "Three elves with max", day1.ThreeElvesWithMost(InputData.Day01Elves));
         }
+        
+        if (IncludeDay(2))
+        {
+            var day2 = new Day02();
+            Output(1, 1, "Score", day2.Score(InputData.Day02Rock));
+            Output(1, 2, "Score", day2.ScoreForceOutcome(InputData.Day02Rock));
+        }
 
         Console.WriteLine();
         Console.WriteLine();

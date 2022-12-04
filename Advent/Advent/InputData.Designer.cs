@@ -157,5 +157,14 @@ namespace Advent {
                 return ResourceManager.GetString("Day01Elves", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Day02Rock {
+            get {
+                return ResourceManager.GetString("Day02Rock", resourceCulture);
+            }
+        }
     }
 }

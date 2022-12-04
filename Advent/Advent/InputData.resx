@@ -24,4 +24,10 @@
     <data name="Day02Rock" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>DataFiles\Day02Rock.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
     </data>
+    <data name="Day03Rucksack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>DataFiles\Day03Rucksack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+    </data>
+    <data name="Day04Assignment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>DataFiles\Day04Assignment.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+    </data>
 </root>

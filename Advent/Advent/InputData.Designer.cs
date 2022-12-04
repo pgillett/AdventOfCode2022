@@ -159,11 +159,188 @@ namespace Advent {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to C Z
+        ///C Z
+        ///A X
+        ///A X
+        ///B Z
+        ///B Z
+        ///B Z
+        ///A Z
+        ///B X
+        ///A X
+        ///A X
+        ///A X
+        ///C Z
+        ///C Z
+        ///C X
+        ///A X
+        ///A X
+        ///A X
+        ///C Z
+        ///B Z
+        ///C Z
+        ///A Y
+        ///B Z
+        ///A X
+        ///C Y
+        ///A X
+        ///A X
+        ///C Y
+        ///C Z
+        ///A Y
+        ///B Z
+        ///A X
+        ///C Y
+        ///B Z
+        ///B Z
+        ///B Z
+        ///A X
+        ///C X
+        ///C X
+        ///B Z
+        ///A X
+        ///C Z
+        ///A X
+        ///B Z
+        ///A Y
+        ///C X
+        ///A X
+        ///C Z
+        ///C Z
+        ///B Z
+        ///C Y
+        ///C X
+        ///C X
+        ///C X
+        ///C X
+        ///A Y
+        ///C Y
+        ///C Z
+        ///C Y
+        ///A X
+        ///C Y
+        ///A X
+        ///B Z
+        ///A Y
+        ///C X
+        ///A X
+        ///B Y
+        ///A X
+        ///C X
+        ///C X
+        ///C Z
+        ///A X
+        ///C X
+        ///A X
+        ///C X
+        ///B Z
+        ///A Z
+        ///B Y
+        ///B Z
+        ///B Z
+        ///A X
+        ///C Y
+        ///B X
+        ///A X
+        ///A X
+        ///B Z
+        ///A X
+        ///C X
+        ///C Z
+        ///C Z
+        ///A X
+        ///C Z
+        ///C Z
+        ///C Z
+        ///C X
+        ///C Z
+        ///A X
+        ///B Z
+        ///B Y
+        ///C Z
+        ///B Z
+        ///B Z
+        ///A  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Day02Rock {
             get {
                 return ResourceManager.GetString("Day02Rock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to gfWpjRRQffQGCHHJsGqjsj
+        ///SclzJZZvmmnPbJtVSqqNBqVCBdSCsd
+        ///tlbvZJDZtmtPcJmlPnhMFQWWpMRFTfLDRRTWRp
+        ///HjMPgSWjVrjgbHRRSSMRgjRdpdbGdlcdCvQfcCdlwQJfdf
+        ///LNDnhtNtLNFFZDtFnhzvdldDflvvDCdlJfldpJ
+        ///ZFLFZZmFtFtTNTSPRrVPWWMpRP
+        ///qLBSBLRwmgzqCbzCffDlrfCV
+        ///TFFFHNWFMFFMpHpGHMTHGNhrldWZCsdZsslZlZfrflDVss
+        ///PTMcPGntTThHhTGctnMvSwjjvmmqLBmnjqqgCR
+        ///nClJtMwwntqVVPJcgZqq
+        ///mjpsDcrcSSFFPZqFBWWgVP
+        ///vQcjsvhrvvrmhbmNHMNnlHbNMtCtNM
+        ///bgvvhnTQtjrrrhsDDf
+        ///pLSMltLzLLSjFrSSjrSJHD
+        ///zNWRLBdZPllPQtCvttgCqb
+        ///DRlDrrFTNDNlgzsGTBfcnqhhcnJfcrCSqc
+        ///MMmm [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day03Rucksack {
+            get {
+                return ResourceManager.GetString("Day03Rucksack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 22-77,14-96
+        ///7-99,65-98
+        ///22-36,37-62
+        ///25-94,24-67
+        ///6-91,1-6
+        ///88-88,2-88
+        ///27-89,58-96
+        ///21-82,9-94
+        ///38-79,27-80
+        ///4-90,30-55
+        ///84-97,52-93
+        ///12-59,11-12
+        ///4-14,5-12
+        ///50-84,49-89
+        ///3-98,1-3
+        ///91-95,8-22
+        ///15-66,17-67
+        ///27-27,27-90
+        ///36-37,37-96
+        ///31-32,32-80
+        ///1-79,2-78
+        ///36-85,20-36
+        ///2-2,2-98
+        ///33-81,80-99
+        ///4-73,45-72
+        ///3-89,1-4
+        ///6-92,21-91
+        ///7-93,2-92
+        ///47-89,47-50
+        ///64-84,63-65
+        ///22-85,21-91
+        ///16-31,11-14
+        ///4-93,3-93
+        ///15-61,61-62
+        ///21-23,22-88
+        ///59-59,11-58
+        ///23-23,22-89
+        ///19-87,78-86
+        ///13-82,19-83
+        ///22-88,76-92
+        ///46-47,46-46
+        ///30-31, [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day04Assignment {
+            get {
+                return ResourceManager.GetString("Day04Assignment", resourceCulture);
             }
         }
     }

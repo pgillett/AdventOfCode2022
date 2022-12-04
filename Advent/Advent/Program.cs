@@ -26,8 +26,22 @@ class Program
         if (IncludeDay(2))
         {
             var day2 = new Day02();
-            Output(1, 1, "Score", day2.Score(InputData.Day02Rock));
-            Output(1, 2, "Score", day2.ScoreForceOutcome(InputData.Day02Rock));
+            Output(2, 1, "Score", day2.Score(InputData.Day02Rock));
+            Output(2, 2, "Score", day2.ScoreForceOutcome(InputData.Day02Rock));
+        }
+        
+        if (IncludeDay(3))
+        {
+            var day3 = new Day03();
+            Output(3, 1, "Priority sum", day3.PrioritySum(InputData.Day03Rucksack));
+            Output(3, 2, "Priority sum groups", day3.PriorityGroup(InputData.Day03Rucksack));
+        }
+
+        if (IncludeDay(4))
+        {
+            var day4 = new Day04();
+            Output(4, 1, "Fully contains", day4.FullyContain(InputData.Day04Assignment));
+            Output(4, 2, "Partial overlaps", day4.Overlaps(InputData.Day04Assignment));
         }
 
         Console.WriteLine();

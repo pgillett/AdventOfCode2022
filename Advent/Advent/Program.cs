@@ -50,6 +50,13 @@ class Program
             Output(5, 1, "Top crates 9000", day5.FinalTop9000(InputData.Day05Crates));
             Output(5, 2, "Top crates 9001", day5.FinalTop9001(InputData.Day05Crates));
         }
+        
+        if (IncludeDay(6))
+        {
+            var day6 = new Day06();
+            Output(6, 1, "Start of packet 4", day6.DetectStart4(InputData.Day06Tuning));
+            Output(6, 2, "Start of packet 14", day6.DetectStart14(InputData.Day06Tuning));
+        }
 
         Console.WriteLine();
         Console.WriteLine();

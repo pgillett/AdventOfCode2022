@@ -43,6 +43,13 @@ class Program
             Output(4, 1, "Fully contains", day4.FullyContain(InputData.Day04Assignment));
             Output(4, 2, "Partial overlaps", day4.Overlaps(InputData.Day04Assignment));
         }
+        
+        if (IncludeDay(5))
+        {
+            var day5 = new Day05();
+            Output(5, 1, "Top crates 9000", day5.FinalTop9000(InputData.Day05Crates));
+            Output(5, 2, "Top crates 9001", day5.FinalTop9001(InputData.Day05Crates));
+        }
 
         Console.WriteLine();
         Console.WriteLine();

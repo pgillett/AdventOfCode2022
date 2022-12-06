@@ -343,5 +343,32 @@ namespace Advent {
                 return ResourceManager.GetString("Day04Assignment", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to             [M] [S] [S]            
+        ///        [M] [N] [L] [T] [Q]        
+        ///[G]     [P] [C] [F] [G] [T]        
+        ///[B]     [J] [D] [P] [V] [F] [F]    
+        ///[D]     [D] [G] [C] [Z] [H] [B] [G]
+        ///[C] [G] [Q] [L] [N] [D] [M] [D] [Q]
+        ///[P] [V] [S] [S] [B] [B] [Z] [M] [C]
+        ///[R] [H] [N] [P] [J] [Q] [B] [C] [F]
+        /// 1   2   3   4   5   6   7   8   9 
+        ///
+        ///move 1 from 7 to 4
+        ///move 3 from 4 to 7
+        ///move 4 from 3 to 4
+        ///move 5 from 6 to 9
+        ///move 1 from 8 to 1
+        ///move 2 from 3 to 2
+        ///move 3 from 4 to 6
+        ///move 1 from 3 to 6
+        ///move 9 from 7 to  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day05Crates {
+            get {
+                return ResourceManager.GetString("Day05Crates", resourceCulture);
+            }
+        }
     }
 }

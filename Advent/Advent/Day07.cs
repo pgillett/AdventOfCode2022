@@ -50,20 +50,20 @@ public class Day07
             var split = line.Split(' ');
             if (split[0][0] == 'd')
             {
-                var newDirectory = new Item(split[1], CurrentDirectory);
+                var newDirectory = new Item(CurrentDirectory);
                 CurrentDirectory.Items[split[1]] = newDirectory;
                 AllDirectories.Add(newDirectory);
             }
             else
             {
-                CurrentDirectory.Items[split[1]] = new Item(split[1], long.Parse(split[0]));
+                CurrentDirectory.Items[split[1]] = new Item(long.Parse(split[0]));
             }
         }
     }
 
     private void Process(string input)
     {
-        RootDirectory = new Item(",", null);
+        RootDirectory = new Item(null);
         AllDirectories = new List<Item> {RootDirectory};
         CurrentDirectory = RootDirectory;
 
@@ -77,22 +77,19 @@ public class Day07
 public class Item
 {
     public Dictionary<string, Item> Items = new();
-    public string Name;
     public long FileSize;
 
     public long Size() => FileSize + Items.Values.Sum(d => d.Size());
     
     public Item Parent;
 
-    public Item(string name, Item parent)
+    public Item(Item parent)
     {
-        Name = name;
         Parent = parent;
     }
 
-    public Item(string name, long fileSize)
+    public Item(long fileSize)
     {
-        Name = name;
         FileSize = fileSize;
     }
 

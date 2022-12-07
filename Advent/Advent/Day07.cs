@@ -32,32 +32,27 @@ public class Day07
 
     public void Parse(string line)
     {
-        if (line[0] == '$')
+        var split = line.Split(' ');
+        switch ((split[0], split[1]))
         {
-            if (line.Substring(2, 2) == "cd")
-            {
-                var cd = line.Substring(5);
-                CurrentDirectory = cd switch
+            case ("$", "cd"):
+                CurrentDirectory = split[2] switch
                 {
                     ".." => CurrentDirectory.Parent,
                     "/" => RootDirectory,
-                    _ => CurrentDirectory.Cd(cd)
+                    _ => CurrentDirectory.Cd(split[2])
                 };
-            }
-        }
-        else
-        {
-            var split = line.Split(' ');
-            if (split[0][0] == 'd')
-            {
+                break;
+            case ("$", "ls"):
+                break;
+            case ("dir", _):
                 var newDirectory = new Item(CurrentDirectory);
                 CurrentDirectory.Items[split[1]] = newDirectory;
                 AllDirectories.Add(newDirectory);
-            }
-            else
-            {
+                break;
+            default:
                 CurrentDirectory.Items[split[1]] = new Item(int.Parse(split[0]));
-            }
+                break;
         }
     }
 

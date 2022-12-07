@@ -6,13 +6,13 @@ namespace Advent;
 
 public class Day07
 {
-    public long SumMost100000(string input)
+    public int SumMost100000(string input)
     {
         Process(input);
         return AllDirectories.Select(d => d.Size()).Where(s => s <= 100000).Sum();
     }
     
-    public long FreeUp(string input)
+    public int FreeUp(string input)
     {
         Process(input);
 
@@ -56,7 +56,7 @@ public class Day07
             }
             else
             {
-                CurrentDirectory.Items[split[1]] = new Item(long.Parse(split[0]));
+                CurrentDirectory.Items[split[1]] = new Item(int.Parse(split[0]));
             }
         }
     }
@@ -77,9 +77,9 @@ public class Day07
 public class Item
 {
     public Dictionary<string, Item> Items = new();
-    public long FileSize;
+    public int FileSize;
 
-    public long Size() => FileSize + Items.Values.Sum(d => d.Size());
+    public int Size() => FileSize + Items.Values.Sum(d => d.Size());
     
     public Item Parent;
 
@@ -88,7 +88,7 @@ public class Item
         Parent = parent;
     }
 
-    public Item(long fileSize)
+    public Item(int fileSize)
     {
         FileSize = fileSize;
     }

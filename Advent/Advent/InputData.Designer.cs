@@ -379,5 +379,58 @@ namespace Advent {
                 return ResourceManager.GetString("Day06Tuning", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to $ cd /
+        ///$ ls
+        ///dir jmtrrrp
+        ///dir jssnn
+        ///dir lbrmb
+        ///11968 pcccp
+        ///$ cd jmtrrrp
+        ///$ ls
+        ///77968 chq.jvb
+        ///dir fmgsql
+        ///$ cd fmgsql
+        ///$ ls
+        ///dir dbnsfp
+        ///dir vvp
+        ///$ cd dbnsfp
+        ///$ ls
+        ///51021 crlq.lrj
+        ///186829 dhcrzvbr.wmn
+        ///16232 fvhn.fqm
+        ///54150 qpbqqj.rpg
+        ///$ cd ..
+        ///$ cd vvp
+        ///$ ls
+        ///179105 rrcsndz.tzp
+        ///$ cd ..
+        ///$ cd ..
+        ///$ cd ..
+        ///$ cd jssnn
+        ///$ ls
+        ///dir bphfqs
+        ///dir dbnsfp
+        ///dir pcccp
+        ///dir snr
+        ///dir zjbvwsnv
+        ///$ cd bphfqs
+        ///$ ls
+        ///110077 dhcrzvbr.wmn
+        ///$ cd ..
+        ///$ cd dbnsfp
+        ///$ ls
+        ///dir hgvh
+        ///dir jtqdcmsz
+        ///154197 rrcsndz.tzp
+        ///$ cd hgvh
+        ///$  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day07Terminal {
+            get {
+                return ResourceManager.GetString("Day07Terminal", resourceCulture);
+            }
+        }
     }
 }

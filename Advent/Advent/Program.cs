@@ -57,6 +57,13 @@ class Program
             Output(6, 1, "Start of packet 4", day6.DetectStart4(InputData.Day06Tuning));
             Output(6, 2, "Start of packet 14", day6.DetectStart14(InputData.Day06Tuning));
         }
+        
+        if (IncludeDay(7))
+        {
+            var day7 = new Day07();
+            Output(7, 1, "Directories under 100000", day7.SumMost100000(InputData.Day07Terminal));
+            Output(7, 2, "Free space", day7.FreeUp(InputData.Day07Terminal));
+        }
 
         Console.WriteLine();
         Console.WriteLine();

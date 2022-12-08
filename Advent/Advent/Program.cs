@@ -64,6 +64,13 @@ class Program
             Output(7, 1, "Directories under 100000", day7.SumMost100000(InputData.Day07Terminal));
             Output(7, 2, "Free space", day7.FreeUp(InputData.Day07Terminal));
         }
+        
+        if (IncludeDay(8))
+        {
+            var day8 = new Day08();
+            Output(8, 1, "Visible trees", day8.VisibleTrees(InputData.Day08Trees));
+            Output(8, 2, "Highest scenic", day8.HighestScenic(InputData.Day08Trees));
+        }
 
         Console.WriteLine();
         Console.WriteLine();

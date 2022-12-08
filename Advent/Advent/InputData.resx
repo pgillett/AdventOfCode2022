@@ -39,4 +39,7 @@
     <data name="Day07Terminal" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>DataFiles\Day07Terminal.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
     </data>
+    <data name="Day08Trees" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>DataFiles\Day08Trees.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+    </data>
 </root>

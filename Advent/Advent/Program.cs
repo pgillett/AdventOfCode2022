@@ -72,6 +72,13 @@ class Program
             Output(8, 2, "Highest scenic", day8.HighestScenic(InputData.Day08Trees));
         }
 
+        if (IncludeDay(9))
+        {
+            var day9 = new Day09();
+            Output(9, 1, "Covers short", day9.CoversShort(InputData.Day09Rope));
+            Output(9, 2, "Covers long", day9.CoversLong(InputData.Day09Rope));
+        }
+        
         Console.WriteLine();
         Console.WriteLine();
 

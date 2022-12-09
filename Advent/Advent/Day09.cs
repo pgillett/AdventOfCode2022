@@ -20,16 +20,18 @@ public class Day09
         {
             var split = line.Split(' ');
             
+            (int x, int y) direction = split[0] switch
+            {
+                "R" => (1, 0),
+                "L" => (-1, 0),
+                "U" => (0, 1),
+                "D" => (0, -1),
+                _ => throw new Exception("invalid")
+            };
+
             for (var i = 0; i < int.Parse(split[1]); i++)
             {
-                knots[0] = split[0] switch
-                {
-                    "R" => knots[0].Move(1, 0),
-                    "L" => knots[0].Move(-1, 0),
-                    "U" => knots[0].Move(0, 1),
-                    "D" => knots[0].Move(0, -1),
-                    _ => throw new Exception("invalid")
-                };
+                knots[0] = knots[0].Move(direction.x, direction.y);
 
                 for (var k = 1; k < number; k++)
                 {

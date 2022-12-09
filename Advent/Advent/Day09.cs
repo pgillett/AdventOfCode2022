@@ -51,12 +51,6 @@ public record Knot(int X, int Y)
     public Knot MoveToward(Knot follow) {
         var dx = follow.X - X;
         var dy = follow.Y - Y;
-        return (Math.Abs(dx), Math.Abs(dy)) switch
-        {
-            (> 1, > 1) => Move(dx - Math.Sign(dx), dy - Math.Sign(dy)),
-            (> 1, _) => Move(dx - Math.Sign(dx), dy),
-            (_, > 1) => Move(dx, dy - Math.Sign(dy)),
-            _ => this
-        };
+        return Math.Abs(dx) > 1 || Math.Abs(dy) > 1 ? Move(Math.Sign(dx), Math.Sign(dy)) : this;
     }
 }

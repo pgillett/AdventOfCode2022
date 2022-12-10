@@ -79,6 +79,13 @@ class Program
             Output(9, 2, "Covers long", day9.CoversLong(InputData.Day09Rope));
         }
         
+        if (IncludeDay(10))
+        {
+            var day10 = new Day10();
+            Output(10, 1, "Strength", day10.Strength(InputData.Day10Cathode));
+            Output(10, 2, "Render", day10.Render(InputData.Day10Cathode));
+        }
+        
         Console.WriteLine();
         Console.WriteLine();
 

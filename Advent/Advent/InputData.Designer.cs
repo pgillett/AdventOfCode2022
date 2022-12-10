@@ -557,5 +557,75 @@ namespace Advent {
                 return ResourceManager.GetString("Day09Rope", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to noop
+        ///noop
+        ///addx 5
+        ///addx 1
+        ///addx 10
+        ///addx -4
+        ///noop
+        ///addx -1
+        ///noop
+        ///addx 5
+        ///addx -5
+        ///addx 9
+        ///addx 2
+        ///addx -15
+        ///addx 18
+        ///addx 8
+        ///addx -2
+        ///noop
+        ///addx -18
+        ///addx 21
+        ///addx 1
+        ///addx -37
+        ///addx 27
+        ///addx -24
+        ///addx 2
+        ///addx 5
+        ///addx -7
+        ///addx 26
+        ///addx -16
+        ///addx 2
+        ///addx 5
+        ///addx -15
+        ///noop
+        ///addx 20
+        ///addx 2
+        ///addx 4
+        ///addx -3
+        ///addx 2
+        ///noop
+        ///addx 3
+        ///addx 2
+        ///addx 5
+        ///addx -40
+        ///addx 2
+        ///addx 33
+        ///addx -30
+        ///addx 5
+        ///addx 5
+        ///addx 17
+        ///addx -19
+        ///addx 2
+        ///addx 5
+        ///addx 20
+        ///addx -16
+        ///addx 3
+        ///addx -2
+        ///addx 7
+        ///noop
+        ///addx -2
+        ///addx 5
+        ///addx 2
+        ///add [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day10Cathode {
+            get {
+                return ResourceManager.GetString("Day10Cathode", resourceCulture);
+            }
+        }
     }
 }

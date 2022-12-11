@@ -48,4 +48,7 @@
     <data name="Day10Cathode" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>DataFiles\Day10Cathode.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
     </data>
+    <data name="Day11Monkey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>DataFiles\Day11Monkey.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+    </data>
 </root>

@@ -627,5 +627,35 @@ namespace Advent {
                 return ResourceManager.GetString("Day10Cathode", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monkey 0:
+        ///  Starting items: 98, 70, 75, 80, 84, 89, 55, 98
+        ///  Operation: new = old * 2
+        ///  Test: divisible by 11
+        ///    If true: throw to monkey 1
+        ///    If false: throw to monkey 4
+        ///
+        ///Monkey 1:
+        ///  Starting items: 59
+        ///  Operation: new = old * old
+        ///  Test: divisible by 19
+        ///    If true: throw to monkey 7
+        ///    If false: throw to monkey 3
+        ///
+        ///Monkey 2:
+        ///  Starting items: 77, 95, 54, 65, 89
+        ///  Operation: new = old + 6
+        ///  Test: divisible by 7
+        ///    If true: throw to monkey 0
+        ///    If false: throw to monkey 5
+        ///
+        ///Monkey 3 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day11Monkey {
+            get {
+                return ResourceManager.GetString("Day11Monkey", resourceCulture);
+            }
+        }
     }
 }

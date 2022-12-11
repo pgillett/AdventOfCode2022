@@ -86,6 +86,13 @@ class Program
             Output(10, 2, "Render", day10.Render(InputData.Day10Cathode));
         }
         
+        if (IncludeDay(11))
+        {
+            var day11 = new Day11();
+            Output(11, 1, "Monkey business", day11.MonkeyBusiness(InputData.Day11Monkey));
+            Output(11, 2, "No worry factor", day11.NoWorryFactor(InputData.Day11Monkey));
+        }
+        
         Console.WriteLine();
         Console.WriteLine();
 

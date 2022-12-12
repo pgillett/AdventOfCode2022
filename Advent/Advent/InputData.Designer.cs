@@ -657,5 +657,20 @@ namespace Advent {
                 return ResourceManager.GetString("Day11Monkey", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to abaaaaaccccccccccccccccccaaaaaaaaaaaaaccccaaaaaaaccccccccccccccccccccccccccccaaaaaa
+        ///abaaaaaaccaaaacccccccccccaaaaaaaaacaaaacaaaaaaaaaacccccccccccccccccccccccccccaaaaaa
+        ///abaaaaaacaaaaaccccccccccaaaaaaaaaaaaaaacaaaaaaaaaacccccccccccccaacccccccccccccaaaaa
+        ///abaaaaaacaaaaaacccccccccaaaaaaaaaaaaaaccaaacaaaccccccccccccccccaacccccccccccccccaaa
+        ///abccaaaccaaaaaacccaaaaccaaaaaaaaaaaaaccccaacaaacccccccccaacaccccacccccccccccccccaaa
+        ///abcccccccaaaaaccccaaaacccccaaaaacccaaaccaaaaaaccccccccccaaaaccccccccccccccccccccaac
+        ///ab [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day12Heightmap {
+            get {
+                return ResourceManager.GetString("Day12Heightmap", resourceCulture);
+            }
+        }
     }
 }

@@ -93,6 +93,13 @@ class Program
             Output(11, 2, "No worry factor", day11.NoWorryFactor(InputData.Day11Monkey));
         }
         
+        if (IncludeDay(12))
+        {
+            var day11 = new Day12();
+            Output(12, 1, "Shortest path start", day11.StepsFromStart(InputData.Day12Heightmap));
+            Output(12, 2, "Shortest path any", day11.StepsAny(InputData.Day12Heightmap));
+        }
+        
         Console.WriteLine();
         Console.WriteLine();
 

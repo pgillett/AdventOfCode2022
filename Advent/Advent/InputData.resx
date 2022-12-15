@@ -54,4 +54,7 @@
     <data name="Day12Heightmap" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>DataFiles\Day12Heightmap.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
     </data>
+    <data name="Day13Distress" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>DataFiles\Day13Distress.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+    </data>
 </root>

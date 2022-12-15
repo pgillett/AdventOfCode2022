@@ -100,6 +100,13 @@ class Program
             Output(12, 2, "Shortest path any", day11.StepsAny(InputData.Day12Heightmap));
         }
         
+        if (IncludeDay(13))
+        {
+            var day13 = new Day13();
+            Output(13, 1, "Sum indices", day13.SumIndices(InputData.Day13Distress));
+            Output(13, 2, "Decoder", day13.Decoder(InputData.Day13Distress));
+        }
+        
         Console.WriteLine();
         Console.WriteLine();
 

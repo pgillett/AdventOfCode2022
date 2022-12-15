@@ -694,5 +694,34 @@ namespace Advent {
                 return ResourceManager.GetString("Day13Distress", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 500,30 -&gt; 504,30
+        ///503,28 -&gt; 507,28
+        ///477,136 -&gt; 477,133 -&gt; 477,136 -&gt; 479,136 -&gt; 479,135 -&gt; 479,136 -&gt; 481,136 -&gt; 481,127 -&gt; 481,136 -&gt; 483,136 -&gt; 483,131 -&gt; 483,136 -&gt; 485,136 -&gt; 485,129 -&gt; 485,136 -&gt; 487,136 -&gt; 487,135 -&gt; 487,136
+        ///496,97 -&gt; 496,99 -&gt; 488,99 -&gt; 488,103 -&gt; 508,103 -&gt; 508,99 -&gt; 502,99 -&gt; 502,97
+        ///537,66 -&gt; 541,66
+        ///491,23 -&gt; 491,15 -&gt; 491,23 -&gt; 493,23 -&gt; 493,18 -&gt; 493,23 -&gt; 495,23 -&gt; 495,15 -&gt; 495,23 -&gt; 497,23 -&gt; 497,15 -&gt; 497,23 -&gt; 499,23 -&gt; 499,18 -&gt; 499,23 -&gt; 501,23 -&gt; 501,14 -&gt; 501,23 -&gt; 50 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day14Regolith {
+            get {
+                return ResourceManager.GetString("Day14Regolith", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sensor at x=98246, y=1908027: closest beacon is at x=1076513, y=2000000
+        ///Sensor at x=1339369, y=2083853: closest beacon is at x=1076513, y=2000000
+        ///Sensor at x=679177, y=3007305: closest beacon is at x=1076513, y=2000000
+        ///Sensor at x=20262, y=3978297: closest beacon is at x=13166, y=4136840
+        ///Sensor at x=3260165, y=2268955: closest beacon is at x=4044141, y=2290104
+        ///Sensor at x=2577675, y=3062584: closest beacon is at x=2141091, y=2828176
+        ///Sensor at x=3683313, y=2729137: closest beacon is at x=4044141, y=229 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day15Beacons {
+            get {
+                return ResourceManager.GetString("Day15Beacons", resourceCulture);
+            }
+        }
     }
 }

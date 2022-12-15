@@ -57,4 +57,10 @@
     <data name="Day13Distress" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>DataFiles\Day13Distress.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
     </data>
+    <data name="Day14Regolith" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>DataFiles\Day14Regolith.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+    </data>
+    <data name="Day15Beacons" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>DataFiles\Day15Beacons.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+    </data>
 </root>

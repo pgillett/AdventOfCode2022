@@ -106,7 +106,14 @@ class Program
             Output(13, 1, "Sum indices", day13.SumIndices(InputData.Day13Distress));
             Output(13, 2, "Decoder", day13.Decoder(InputData.Day13Distress));
         }
-        
+
+        if (IncludeDay(14))
+        {
+            var day14 = new Day14();
+            Output(14, 1, "Resting sand", day14.RestingSand(InputData.Day14Regolith));
+            Output(14, 2, "Resting sand with floor", day14.RestingSandWithFloor(InputData.Day14Regolith));
+        }
+
         Console.WriteLine();
         Console.WriteLine();
 

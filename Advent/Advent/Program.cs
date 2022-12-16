@@ -113,6 +113,13 @@ class Program
             Output(14, 1, "Resting sand", day14.RestingSand(InputData.Day14Regolith));
             Output(14, 2, "Resting sand with floor", day14.RestingSandWithFloor(InputData.Day14Regolith));
         }
+        
+        if (IncludeDay(15))
+        {
+            var day15 = new Day15();
+            Output(15, 1, "No beacons on line", day15.NoBeacons(InputData.Day15Beacons, 2000000));
+            Output(15, 2, "Tuning", day15.Tuning(InputData.Day15Beacons, 4000000));
+        }
 
         Console.WriteLine();
         Console.WriteLine();

@@ -723,5 +723,22 @@ namespace Advent {
                 return ResourceManager.GetString("Day15Beacons", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valve OK has flow rate=0; tunnels lead to valves RW, FX
+        ///Valve JY has flow rate=13; tunnel leads to valve TT
+        ///Valve FX has flow rate=16; tunnels lead to valves OK, LF, GO, IV
+        ///Valve TD has flow rate=0; tunnels lead to valves XZ, ED
+        ///Valve VF has flow rate=9; tunnels lead to valves DS, LU, TR, WO
+        ///Valve TT has flow rate=0; tunnels lead to valves XZ, JY
+        ///Valve KR has flow rate=8; tunnels lead to valves VL, CI, GO, JJ, TQ
+        ///Valve HN has flow rate=0; tunnels lead to valves YG, AA
+        ///Valve MC has flow rate=24; tunn [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day16Volcanium {
+            get {
+                return ResourceManager.GetString("Day16Volcanium", resourceCulture);
+            }
+        }
     }
 }

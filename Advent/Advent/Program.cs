@@ -7,7 +7,7 @@ class Program
 {
     private static Stopwatch _stopwatch;
 
-    private const int From = 1;
+    private const int From = 16;
     private const int To = 25;
 
     private static readonly int[,] Times = new int[25, 2];
@@ -119,6 +119,13 @@ class Program
             var day15 = new Day15();
             Output(15, 1, "No beacons on line", day15.NoBeacons(InputData.Day15Beacons, 2000000));
             Output(15, 2, "Tuning", day15.Tuning(InputData.Day15Beacons, 4000000));
+        }
+        
+        if (IncludeDay(16))
+        {
+            var day16 = new Day16();
+            Output(16, 1, "Pressure", day16.MostPressure(InputData.Day16Volcanium));
+            Output(16, 2, "Pressure with elephant", day16.MostPressureWithElephant(InputData.Day16Volcanium));
         }
 
         Console.WriteLine();

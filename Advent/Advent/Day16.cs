@@ -15,8 +15,8 @@ public class Day16
     {
         var valves = ParseAll(input);
 
-        var queue = new Queue<State>();
-        queue.Enqueue(new State(valves["AA"]));
+        var states = new List<State>();
+        states.Add(new State(valves["AA"]));
 
         var allCount = valves.Values.Count(v => v.Rate > 0);
         
@@ -24,20 +24,25 @@ public class Day16
 
         var seen = new Dictionary<int, int>();
 
-        while (queue.Count > 0)
+        for (var pass = 0; pass < (withElephant ? 26 : 30); pass++)
         {
-            var state = queue.Dequeue();
+            var newList = new List<State>();
 
-            if (state.Time == (withElephant ? 25 : 29))
+            foreach (var state in states)
             {
-                if (state.Pressure + state.OpenPressure > biggest)
-                    biggest = state.Pressure + state.OpenPressure;
-            }
-            else
-            {
+                var hash = state.Hash();
+
+                if (seen.ContainsKey(hash))
+                {
+                    if(seen[hash] >= state.Pressure)
+                        continue;
+                }
+
+                seen[hash] = state.Pressure;
+                
                 if (state.OpenBits == allCount)
                 {
-                    queue.Enqueue(state.MoveTo(state.At, state.ElephantAt, false, false));
+                    newList.Add(state.MoveTo(state.At, state.ElephantAt, false, false));
                 }
                 else
                 {
@@ -57,12 +62,7 @@ public class Day16
                                     {
                                         State newState;
                                         newState = state.MoveTo(to, elephantTo, m == -1, e == -1);
-                                        var newHash = newState.Hash();
-                                        if (!seen.ContainsKey(newHash) || seen[newHash] < newState.Pressure)
-                                        {
-                                            queue.Enqueue(newState);
-                                            seen[newHash] = newState.Pressure;
-                                        }
+                                        newList.Add(newState);
                                     }
                                 }
                             }
@@ -72,19 +72,17 @@ public class Day16
                             if (to != state.CameFrom && state.ElephantAt != state.ElephantCameFrom)
                             {
                                 var newState = state.MoveTo(to, state.ElephantAt, m == -1, false);
-                                var newHash = newState.Hash();
-                                if (!seen.ContainsKey(newHash) || seen[newHash] < newState.Pressure)
-                                {
-                                    queue.Enqueue(newState);
-                                    seen[newHash] = newState.Pressure;
-                                }
+                                newList.Add(newState);
                             }
                         }
                     }
                 }
             }
+
+            states = newList.OrderByDescending(i => i.Pressure).ToList();
         }
-        return biggest;
+
+        return states.Max(i => i.Pressure);
     }
 
     public Dictionary<string, Valve> ParseAll(string input)

@@ -128,6 +128,13 @@ class Program
             Output(16, 2, "Pressure with elephant", day16.MostPressureWithElephant(InputData.Day16Volcanium));
         }
 
+        if (IncludeDay(17))
+        {
+            var day17 = new Day17();
+            Output(17, 1, "Height after 2022", day17.UnitsTall(InputData.Day17Jets));
+            Output(17, 1, "Height after a trillion", day17.Trillion(InputData.Day17Jets));
+        }
+
         Console.WriteLine();
         Console.WriteLine();
 

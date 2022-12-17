@@ -66,4 +66,7 @@
     <data name="Day16Volcanium" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>DataFiles\Day16Volcanium.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
     </data>
+    <data name="Day17Jets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>DataFiles\Day17Jets.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+    </data>
 </root>

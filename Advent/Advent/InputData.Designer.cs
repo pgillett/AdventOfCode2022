@@ -740,5 +740,14 @@ namespace Advent {
                 return ResourceManager.GetString("Day16Volcanium", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &gt;&gt;&lt;&lt;&lt;&lt;&gt;&gt;&gt;&lt;&gt;&gt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&lt;&lt;&gt;&gt;&gt;&lt;&lt;&gt;&gt;&lt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&lt;&lt;&gt;&gt;&lt;&lt;&lt;&lt;&gt;&lt;&lt;&gt;&gt;&lt;&lt;&lt;&gt;&lt;&lt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&lt;&lt;&gt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&gt;&lt;&lt;&lt;&gt;&gt;&lt;&lt;&lt;&lt;&gt;&gt;&gt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&gt;&lt;&lt;&gt;&gt;&gt;&lt;&lt;&gt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&lt;&lt;&gt;&gt;&lt;&lt;&gt;&lt;&lt;&gt;&lt;&lt;&gt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&lt;&gt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&lt;&lt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&lt;&lt;&gt;&lt;&lt;&gt;&gt;&gt;&gt;&lt;&lt;&gt;&gt;&gt;&lt;&lt;&lt;&gt;&gt;&gt;&lt;&lt;&lt;&gt;&lt;&lt;&gt;&....
+        /// </summary>
+        internal static string Day17Jets {
+            get {
+                return ResourceManager.GetString("Day17Jets", resourceCulture);
+            }
+        }
     }
 }

@@ -18,20 +18,51 @@ public class Day16
         var states = new List<State>();
         states.Add(new State(valves["AA"]));
 
-        var allCount = valves.Values.Count(v => v.Rate > 0);
+        var allCount = valves.Values.Where(v => v.Rate > 0).Sum(v => v.Hash);
+
+        var valveHash = valves.Values
+            .Where(v => v.Rate > 0)
+            .ToDictionary(v => v.Hash, v => v.Rate);
+
+        var left = new int[allCount + 1];
+        for (var i = 0; i < allCount; i++)
+        {
+            var count = 0;
+            for (var j = 1; j < allCount; j = j << 1)
+            {
+                if ((i & j) == 0)
+                    count += valveHash[j];
+            }
+
+            left[i] = count;
+        }
         
         var biggest = 0;
 
         var seen = new Dictionary<int, int>();
 
-        for (var pass = 0; pass < (withElephant ? 26 : 30); pass++)
+        var maxPass = withElephant ? 26 : 30;
+
+        for (var pass = 0; pass < maxPass; pass++)
         {
             var newList = new List<State>();
 
             foreach (var state in states)
             {
-                var hash = state.Hash();
+                biggest = Math.Max(biggest, state.Pressure);
+                
+                if (state.OpenBits == allCount)
+                {
+                    continue;
+                }
 
+                var steps = (maxPass - pass) - 1;
+                var maybe = left[state.OpenBits] * steps;
+                
+                if(state.Pressure + maybe <= biggest)
+                    continue;
+                
+                var hash = state.Hash();
                 if (seen.ContainsKey(hash))
                 {
                     if(seen[hash] >= state.Pressure)
@@ -42,7 +73,7 @@ public class Day16
                 
                 if (state.OpenBits == allCount)
                 {
-                    newList.Add(state.MoveTo(state.At, state.ElephantAt, false, false));
+                    newList.Add(state.MoveTo(state.At, state.ElephantAt, false, false, 0));
                 }
                 else
                 {
@@ -61,7 +92,7 @@ public class Day16
                                     if (to != state.CameFrom && state.ElephantAt != state.ElephantCameFrom)
                                     {
                                         State newState;
-                                        newState = state.MoveTo(to, elephantTo, m == -1, e == -1);
+                                        newState = state.MoveTo(to, elephantTo, m == -1, e == -1, steps);
                                         newList.Add(newState);
                                     }
                                 }
@@ -71,7 +102,7 @@ public class Day16
                         {
                             if (to != state.CameFrom && state.ElephantAt != state.ElephantCameFrom)
                             {
-                                var newState = state.MoveTo(to, state.ElephantAt, m == -1, false);
+                                var newState = state.MoveTo(to, state.ElephantAt, m == -1, false, steps);
                                 newList.Add(newState);
                             }
                         }
@@ -82,7 +113,7 @@ public class Day16
             states = newList.OrderByDescending(i => i.Pressure).ToList();
         }
 
-        return states.Max(i => i.Pressure);
+        return biggest;
     }
 
     public Dictionary<string, Valve> ParseAll(string input)
@@ -138,11 +169,11 @@ public class Day16
         {
             OpenBits = state.OpenBits;
             Time = state.Time + 1;
-            Pressure = state.Pressure + state.OpenPressure;
+            Pressure = state.Pressure;// + state.OpenPressure;
             OpenPressure = state.OpenPressure;
         }
         
-        public State MoveTo(Valve to, Valve elephant, bool open, bool openElephant)
+        public State MoveTo(Valve to, Valve elephant, bool open, bool openElephant, int steps)
         {
             var copy = new State(this)
             {
@@ -154,12 +185,14 @@ public class Day16
             if (open)
             {
                 copy.OpenBits += to.Hash;
-                copy.OpenPressure += to.Rate;
+                copy.Pressure += to.Rate * steps;
+//                copy.OpenPressure += to.Rate;
             }
             if (openElephant)
             {
                 copy.OpenBits += elephant.Hash;
-                copy.OpenPressure += elephant.Rate;
+                copy.Pressure += elephant.Rate * steps;
+//                copy.OpenPressure += elephant.Rate;
             }
             return copy;
         }

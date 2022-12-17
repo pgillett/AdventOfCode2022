@@ -46,65 +46,68 @@ public class Day16
         for (var pass = 0; pass < maxPass; pass++)
         {
             var newList = new List<State>();
+            var steps = (maxPass - pass) - 1;
 
             foreach (var state in states)
             {
                 biggest = Math.Max(biggest, state.Pressure);
-                
+
                 if (state.OpenBits == allCount)
                 {
                     continue;
                 }
 
-                var steps = (maxPass - pass) - 1;
-                var maybe = left[state.OpenBits] * steps;
-                
-                if(state.Pressure + maybe <= biggest)
+                var maxLeft = left[state.OpenBits];
+                var maybe = state.Pressure + maxLeft * steps;
+
+                if (maybe <= biggest)
                     continue;
-                
+
+                maybe -= maxLeft;
+
                 var hash = state.Hash();
                 if (seen.ContainsKey(hash))
                 {
-                    if(seen[hash] >= state.Pressure)
+                    if (seen[hash] >= state.Pressure)
                         continue;
                 }
 
                 seen[hash] = state.Pressure;
-                
-                if (state.OpenBits == allCount)
-                {
-                    newList.Add(state.MoveTo(state.At, state.ElephantAt, false, false, 0));
-                }
-                else
-                {
-                    for (var m = state.CanOpen ? -1 : 0; m < state.At.LeadsTo.Length; m++)
-                    {
-                        var to = m == -1 ? state.At : state.At.LeadsTo[m];
-                        if (withElephant)
-                        {
-                            var start = state.SamePlace ? Math.Max(m, 0) : (state.CanElephantOpen ? -1 : 0);
-                            for (var e = start; e < state.ElephantAt.LeadsTo.Length; e++)
-                            {
-                                var elephantTo = e == -1 ? state.ElephantAt : state.ElephantAt.LeadsTo[e];
 
-                                if (to != elephantTo || m != e)
-                                {
-                                    if (to != state.CameFrom && state.ElephantAt != state.ElephantCameFrom)
-                                    {
-                                        State newState;
-                                        newState = state.MoveTo(to, elephantTo, m == -1, e == -1, steps);
-                                        newList.Add(newState);
-                                    }
-                                }
-                            }
-                        }
-                        else
+                for (var m = state.CanOpen ? -1 : 0; m < state.At.LeadsTo.Length; m++)
+                {
+                    var to = m == -1 ? state.At : state.At.LeadsTo[m];
+                    
+                    if (withElephant)
+                    {
+                        var start = state.SamePlace ? Math.Max(m, 0) : (state.CanElephantOpen ? -1 : 0);
+                        for (var e = start; e < state.ElephantAt.LeadsTo.Length; e++)
                         {
-                            if (to != state.CameFrom && state.ElephantAt != state.ElephantCameFrom)
+                            var elephantTo = e == -1 ? state.ElephantAt : state.ElephantAt.LeadsTo[e];
+                            
+                            if (m >= 0 && e >= 0)
                             {
-                                var newState = state.MoveTo(to, state.ElephantAt, m == -1, false, steps);
+                                if (maybe <= biggest)
+                                    continue;
+                                if (to == state.ElephantAt && elephantTo == state.At)
+                                    continue;
+                                if (to == state.CameFrom || state.ElephantAt == state.ElephantCameFrom)
+                                    continue;
+                            }
+
+                            if (to != elephantTo || m != -1 || e != -1)
+                            {
+                                var newState = state.MoveTo(to, elephantTo, m == -1, e == -1, steps);
                                 newList.Add(newState);
                             }
+                        }
+                    }
+                    else
+                    {
+                        if (to != state.CameFrom && state.ElephantAt != state.ElephantCameFrom)
+                        {
+                            var newState = state.MoveTo(to, state.ElephantAt, m == -1, false, steps);
+                            newList.Add(newState);
                         }
                     }
                 }
@@ -140,7 +143,6 @@ public class Day16
         public int Time;
         public int Pressure;
         public Valve CameFrom;
-        public int OpenPressure;
         public Valve ElephantAt;
         public Valve ElephantCameFrom;
         public int OpenBits;
@@ -169,8 +171,7 @@ public class Day16
         {
             OpenBits = state.OpenBits;
             Time = state.Time + 1;
-            Pressure = state.Pressure;// + state.OpenPressure;
-            OpenPressure = state.OpenPressure;
+            Pressure = state.Pressure;
         }
         
         public State MoveTo(Valve to, Valve elephant, bool open, bool openElephant, int steps)
@@ -186,13 +187,11 @@ public class Day16
             {
                 copy.OpenBits += to.Hash;
                 copy.Pressure += to.Rate * steps;
-//                copy.OpenPressure += to.Rate;
             }
             if (openElephant)
             {
                 copy.OpenBits += elephant.Hash;
                 copy.Pressure += elephant.Rate * steps;
-//                copy.OpenPressure += elephant.Rate;
             }
             return copy;
         }

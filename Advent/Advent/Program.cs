@@ -135,6 +135,13 @@ class Program
             Output(17, 1, "Height after a trillion", day17.Trillion(InputData.Day17Jets));
         }
 
+        if (IncludeDay(18))
+        {
+            var day18 = new Day18();
+            Output(18, 1, "Open sides", day18.OpenSides(InputData.Day18Lava));
+            Output(18, 1, "Visible sides", day18.VisibleSides(InputData.Day18Lava));
+        }
+
         Console.WriteLine();
         Console.WriteLine();
 

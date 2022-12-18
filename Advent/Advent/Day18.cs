@@ -11,19 +11,14 @@ public class Day18
         var cubes = input.Split(Environment.NewLine)
             .Select(Parse).ToHashSet();
 
-        var minX = cubes.Min(c => c.x)-1;
-        var maxX = cubes.Max(c => c.x)+1;
-        var minY = cubes.Min(c => c.y)-1;
-        var maxY = cubes.Max(c => c.y)+1;
-        var minZ = cubes.Min(c => c.z)-1;
-        var maxZ = cubes.Max(c => c.z)+1;
+        var min = new XYZ(cubes.Min(c => c.X) - 1, cubes.Min(c => c.Y) - 1, cubes.Min(c => c.Z) - 1);
+        var max = new XYZ(cubes.Max(c => c.X) + 1, cubes.Max(c => c.Y) + 1, cubes.Max(c => c.Z) + 1);
 
-        var queue = new Queue<(int x, int y, int z)>();
+        var queue = new Queue<XYZ>();
+        queue.Enqueue(min);
 
-        var seen = new HashSet<(int x, int y, int z)>();
+        var seen = new HashSet<XYZ>();
         
-        queue.Enqueue((minX, minY, minZ));
-
         var edges = 0;
 
         while (queue.Count > 0)
@@ -35,19 +30,16 @@ public class Day18
 
             seen.Add(pos);
 
-            foreach (var direction in Adjacent)
+            foreach (var check in Adjacent.Select(d => pos.Add(d)))
             {
-                (int x, int y, int z) check = (pos.x + direction.x, pos.y + direction.y, pos.z + direction.z);
-                if (check.x >= minX && check.x <= maxX
-                                    && check.y >= minY && check.y <= maxY
-                                    && check.z >= minZ && check.z <= maxZ)
+                if (check.X >= min.X && check.X <= max.X
+                                    && check.Y >= min.Y && check.Y <= max.Y
+                                    && check.Z >= min.Z && check.Z <= max.Z)
                 {
                     if (cubes.Contains(check))
                         edges++;
                     else
-                    {
                         queue.Enqueue(check);
-                    }
                 }
             }
             
@@ -56,8 +48,15 @@ public class Day18
         return edges;
     }
 
-    public (int x, int y, int z)[] Adjacent = 
-        {(-1, 0, 0), (1, 0, 0), (0, -1, 0), (0, 1, 0), (0, 0, -1), (0, 0, 1)};
+    public XYZ[] Adjacent =
+    {
+        new(-1, 0, 0),
+        new(1, 0, 0), 
+        new(0, -1, 0),
+        new(0, 1, 0),
+        new(0, 0, -1),
+        new(0, 0, 1)
+    };
     
     
     public int OpenSides(string input)
@@ -65,14 +64,12 @@ public class Day18
         var cubes = input.Split(Environment.NewLine)
             .Select(Parse).ToArray();
 
-        var sides = new Dictionary<(int fx, int fy, int fz, int tx, int ty, int tz), int>();
+        var sides = new Dictionary<(XYZ from, XYZ to), int>();
 
         foreach (var cube in cubes)
         {
-            foreach (var m in Matrix)
+            foreach (var side in Matrix.Select(m => (cube.Add(m.from), cube.Add(m.to))))
             {
-                var side = (cube.x + m.fx, cube.y + m.fy, cube.z + m.fz,
-                    cube.x + m.tx, cube.y + m.ty, cube.z + m.tz);
                 sides[side] = (sides.ContainsKey(side) ? sides[side] : 0) + 1;
             }
         }
@@ -80,19 +77,23 @@ public class Day18
         return sides.Count(s => s.Value == 1);
     }
 
-    public (int fx, int fy, int fz, int tx, int ty, int tz)[] Matrix = new[]
-    {
-        (0, 0, 0, 1, 1, 0),
-        (0, 0, 1, 1, 1, 1),
-        (0, 0, 0, 1, 0, 1),
-        (0, 1, 0, 1, 1, 1),
-        (0, 0, 0, 0, 1, 1),
-        (1, 0, 0, 1, 1, 1)
+    public (XYZ from, XYZ to)[] Matrix = {
+        (new XYZ(0, 0, 0), new XYZ(1, 1, 0)),
+        (new XYZ(0, 0, 1), new XYZ( 1, 1, 1)),
+        (new XYZ(0, 0, 0), new XYZ(1, 0, 1)),
+        (new XYZ(0, 1, 0), new XYZ(1, 1, 1)),
+        (new XYZ(0, 0, 0), new XYZ(0, 1, 1)),
+        (new XYZ(1, 0, 0), new XYZ(1, 1, 1))
     };
 
-    public (int x, int y, int z) Parse(string input)
+    public XYZ Parse(string input)
     {
         var split = input.Split(',').Select(int.Parse).ToArray();
-        return (split[0], split[1], split[2]);
+        return new XYZ(split[0], split[1], split[2]);
+    }
+
+    public record XYZ(int X, int Y, int Z)
+    {
+        public XYZ Add(XYZ toAdd) => new XYZ(X + toAdd.X, Y + toAdd.Y, Z + toAdd.Z);
     }
 }

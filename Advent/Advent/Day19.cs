@@ -16,13 +16,29 @@ public class Day19
         var total = 0;
         foreach (var blueprint in blueprints)
         {
-            var max = MaxGeode(blueprint);
+            var max = MaxGeode(blueprint, 24);
             total += max * blueprint.Number;
         }
         return total;
     }
+    
+    public int QualityLevels3(string input)
+    {
+        var blueprints = input.Split("Blueprint ")
+            .Where(l => l.Length > 5)
+            .Select(l => new Blueprint(l))
+            .Where(b => b.Number <= 3).ToArray();
 
-    public int MaxGeode(Blueprint blueprint)
+        var total = 1;
+        foreach (var blueprint in blueprints)
+        {
+            var max = MaxGeode(blueprint, 32);
+            total *= max;
+        }
+        return total;
+    }
+
+    public int MaxGeode(Blueprint blueprint, int totalMinutes)
     {
         var startState = (ulong)1;
 
@@ -34,13 +50,13 @@ public class Day19
         var maxGeode = 0;
         var maxObsidian = 0;
         
-        for(var minute = 0; minute < 24; minute++)
+        for(var minute = 0; minute < totalMinutes; minute++)
         {
             var newCheck = new List<ulong>();
 
             foreach (var state in toCheck)
             {
-                if (minute == 23)
+                if (minute == totalMinutes - 1)
                 {
                     var resource = state + (state << 32);
                     var geode = resource >> (24+32);
@@ -54,36 +70,45 @@ public class Day19
                     var nothing = state + (state << 32);
                     newCheck.Add(nothing);
 
-                    if (minute < 17)
+                    if (minute < totalMinutes - 7)
                     {
-                        if (CanMake(blueprint.Robots[0], state))
+                        if ((state & 255) < blueprint.Max[0])
                         {
-                            var next = state - blueprint.Robots[0].Cost;
-                            next += (next << 32);
-                            next += 1;
-                            newCheck.Add(next);
+                            if (CanMake(blueprint.Robots[0], state))
+                            {
+                                var next = state - blueprint.Robots[0].Cost;
+                                next += (next << 32);
+                                next += 1;
+                                newCheck.Add(next);
+                            }
                         }
                     }
 
-                    if (minute < 19)
+                    if (minute < totalMinutes - 5)
                     {
-                        if (CanMake(blueprint.Robots[1], state))
+                        if ((state & (255 << 8)) < blueprint.Max[1])
                         {
-                            var next = state - blueprint.Robots[1].Cost;
-                            next += (next << 32);
-                            next += 1 << 8;
-                            newCheck.Add(next);
+                            if (CanMake(blueprint.Robots[1], state))
+                            {
+                                var next = state - blueprint.Robots[1].Cost;
+                                next += (next << 32);
+                                next += 1 << 8;
+                                newCheck.Add(next);
+                            }
                         }
                     }
 
-                    if (minute < 21)
+                    if (minute < totalMinutes - 3)
                     {
-                        if (CanMake(blueprint.Robots[2], state))
+                        if ((state & (255 << 16)) < blueprint.Max[2])
                         {
-                            var next = state - blueprint.Robots[2].Cost;
-                            next += (next << 32);
-                            next += 1 << 16;
-                            newCheck.Add(next);
+                            if (CanMake(blueprint.Robots[2], state))
+                            {
+                                var next = state - blueprint.Robots[2].Cost;
+                                next += (next << 32);
+                                next += 1 << 16;
+                                newCheck.Add(next);
+                            }
                         }
                     }
 
@@ -105,7 +130,7 @@ public class Day19
 
     public bool CanMake(Robot robot, ulong resource)
     {
-        for (var i = 0; i < 4; i++)
+        for (var i = 0; i < 3; i++)
         {
             var m = ((ulong) 255) << (i * 8 + 32);
             var a = resource & m;
@@ -188,12 +213,20 @@ public class Day19
     {
         public Robot[] Robots;
         public int Number;
+        public uint[] Max;
 
         public Blueprint(string input)
         {
             Number = int.Parse(Word(input, ':'));
             var split = input.Split("Each ");
             Robots = split.Skip(1).Select(r => new Robot(r)).ToArray();
+
+            Max = new uint[4];
+
+            for (var i = 0; i < 3; i++)
+            {
+                Max[i] = ((uint) Robots.Max(r => r.Costs[i])) << (i * 8);
+            }
         }
     }
 

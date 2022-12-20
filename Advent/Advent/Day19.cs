@@ -24,10 +24,9 @@ public class Day19
 
     public int MaxGeode(Blueprint blueprint)
     {
-        var startState = new State();
-        startState.Robot = 1;
+        var startState = (ulong)1;
 
-        var toCheck = new List<State>();
+        var toCheck = new List<ulong>();
         toCheck.Add(startState);
 
         var biggest = 0;
@@ -37,15 +36,15 @@ public class Day19
         
         for(var minute = 0; minute < 24; minute++)
         {
-            var newCheck = new List<State>();
+            var newCheck = new List<ulong>();
 
             foreach (var state in toCheck)
             {
                 if (minute == 23)
                 {
-                    var resource = state.Resource + state.Robot;
-                    var geode = resource >> 24;
-                    if (geode > biggest)
+                    var resource = state + state << 32;
+                    var geode = state >> (24+32);
+                    if ((int)geode > biggest)
                         biggest = (int)geode;
                 }
                 else
@@ -60,21 +59,20 @@ public class Day19
                     // var r0 = blueprint.Robots[0].CanMake(next.Resources);
                     // next.Adjust(blueprint.Robots[0], r0);
                     // newCheck.Add(next);
-                    for (var r3 = Math.Min(1,blueprint.Robots[3].CanMake(state.Resource)); r3 >= 0; r3--)
+                    for (var r3 = Math.Min(1,CanMake(blueprint.Robots[3],state)); r3 >= 0; r3--)
                     {
-                        var withRobot3 = state.Resource - (r3 == 1 ? blueprint.Robots[3].Cost : 0);
-                        for (var r2 = Math.Min(minute < 21 ? 1 : 0,blueprint.Robots[2].CanMake(withRobot3)); r2 >= 0; r2--)
+                        var withRobot3 = state - (r3 == 1 ? blueprint.Robots[3].Cost << 32: 0);
+                        for (var r2 = Math.Min(minute < 21 ? 1 : 0,CanMake(blueprint.Robots[2],withRobot3)); r2 >= 0; r2--)
                         {
-                            var withRobot2 = withRobot3 - (r2 == 1 ? blueprint.Robots[2].Cost : 0);
-                            for (var r1 = Math.Min(minute < 19 ? 1 : 0,blueprint.Robots[1].CanMake(withRobot2)); r1 >= 0; r1--)
+                            var withRobot2 = withRobot3 - (r2 == 1 ? blueprint.Robots[2].Cost << 32 : 0);
+                            for (var r1 = Math.Min(minute < 19 ? 1 : 0,CanMake(blueprint.Robots[1],withRobot2)); r1 >= 0; r1--)
                             {
-                                var withRobot1 = withRobot2 - (r1 == 1 ? blueprint.Robots[1].Cost : 0);
-                                for (var r0 = Math.Min(minute < 17 ? 1 : 0, blueprint.Robots[0].CanMake(withRobot1)); r0 >= 0; r0--)
+                                var withRobot1 = withRobot2 - (r1 == 1 ? blueprint.Robots[1].Cost << 32 : 0);
+                                for (var r0 = Math.Min(minute < 17 ? 1 : 0, CanMake(blueprint.Robots[0], withRobot1)); r0 >= 0; r0--)
                                 {
-                                    var withRobot0 = withRobot1 - (r0 == 1 ? blueprint.Robots[0].Cost : 0);
-                                    var next = state.Copy();
-                                    next.Resource = withRobot0 + next.Robot;
-                                    next.AddRobot(r0, r1, r2, r3);
+                                    var withRobot0 = withRobot1 - (r0 == 1 ? blueprint.Robots[0].Cost << 32: 0);
+                                    var next = withRobot0 + (withRobot0 << 32);
+                                    next += ((ulong) r0) + (((ulong) r1) << 8) + ((ulong) r2 << 16) + ((ulong) r3 << 24);
 //                                    next.Resource = withRobot0;
                                     newCheck.Add(next);
                                 }
@@ -89,6 +87,18 @@ public class Day19
         }
         
         return biggest;
+    }
+
+    public int CanMake(Robot robot, ulong resource)
+    {
+        for (var i = 0; i < 4; i++)
+        {
+            var a = (int) (resource >> (i * 8 + 32)) & 255;
+            if (a < robot.Costs[i])
+                return 0;
+        }
+
+        return 1;
     }
 
     [DebuggerDisplay(
@@ -174,7 +184,7 @@ public class Day19
     public class Robot
     {
         public int[] Costs = new int[4];
-        public uint Cost = 0;
+        public ulong Cost = 0;
         public Mineral Type;
 
         public Robot(string input)

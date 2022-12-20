@@ -42,8 +42,10 @@ public class Day19
             {
                 if (minute == 23)
                 {
-                    var resource = state + state << 32;
-                    var geode = state >> (24+32);
+                    var resource = state + (state << 32);
+                    var geode = resource >> (24+32);
+                    if ((int) geode < 0)
+                        throw new Exception(geode.ToString());
                     if ((int)geode > biggest)
                         biggest = (int)geode;
                 }
@@ -61,20 +63,24 @@ public class Day19
                     // newCheck.Add(next);
                     for (var r3 = Math.Min(1,CanMake(blueprint.Robots[3],state)); r3 >= 0; r3--)
                     {
-                        var withRobot3 = state - (r3 == 1 ? blueprint.Robots[3].Cost << 32: 0);
+                        var withRobot3 = state - (r3 == 1 ? blueprint.Robots[3].Cost: 0);
                         for (var r2 = Math.Min(minute < 21 ? 1 : 0,CanMake(blueprint.Robots[2],withRobot3)); r2 >= 0; r2--)
                         {
-                            var withRobot2 = withRobot3 - (r2 == 1 ? blueprint.Robots[2].Cost << 32 : 0);
+                            if (r3 == 1) r2 = 0;
+                            var withRobot2 = withRobot3 - (r2 == 1 ? blueprint.Robots[2].Cost : 0);
                             for (var r1 = Math.Min(minute < 19 ? 1 : 0,CanMake(blueprint.Robots[1],withRobot2)); r1 >= 0; r1--)
                             {
-                                var withRobot1 = withRobot2 - (r1 == 1 ? blueprint.Robots[1].Cost << 32 : 0);
+                                if (r3 == 1 || r2 == 1) r1 = 0;
+                                var withRobot1 = withRobot2 - (r1 == 1 ? blueprint.Robots[1].Cost : 0);
                                 for (var r0 = Math.Min(minute < 17 ? 1 : 0, CanMake(blueprint.Robots[0], withRobot1)); r0 >= 0; r0--)
                                 {
-                                    var withRobot0 = withRobot1 - (r0 == 1 ? blueprint.Robots[0].Cost << 32: 0);
+                                    if (r3 == 1 || r2 == 1 || r1 == 1) r0 = 0;
+                                    var withRobot0 = withRobot1 - (r0 == 1 ? blueprint.Robots[0].Cost: 0);
                                     var next = withRobot0 + (withRobot0 << 32);
                                     next += ((ulong) r0) + (((ulong) r1) << 8) + ((ulong) r2 << 16) + ((ulong) r3 << 24);
 //                                    next.Resource = withRobot0;
-                                    newCheck.Add(next);
+
+                                        newCheck.Add(next);
                                 }
                     
                             }
@@ -93,8 +99,10 @@ public class Day19
     {
         for (var i = 0; i < 4; i++)
         {
-            var a = (int) (resource >> (i * 8 + 32)) & 255;
-            if (a < robot.Costs[i])
+            var m = ((ulong) 255) << (i * 8 + 32);
+            var a = resource & m;
+            var b = robot.Cost & m;
+            if (a < b)
                 return 0;
         }
 
@@ -203,7 +211,7 @@ public class Day19
 
             for (var i = 0; i < 3; i++)
             {
-                Cost += ((uint) Costs[i]) << (i * 8);
+                Cost += ((ulong) Costs[i]) << (i * 8 + 32);
             }
         }
 

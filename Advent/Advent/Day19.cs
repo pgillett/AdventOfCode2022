@@ -51,42 +51,50 @@ public class Day19
                 }
                 else
                 {
-                    
-                    // var r3 = blueprint.Robots[3].CanMake(next.Resources);
-                    // next.Adjust(blueprint.Robots[3], r3);
-                    // var r2 = blueprint.Robots[2].CanMake(next.Resources);
-                    // next.Adjust(blueprint.Robots[2], r2);
-                    // var r1 = blueprint.Robots[1].CanMake(next.Resources);
-                    // next.Adjust(blueprint.Robots[1], r1);
-                    // var r0 = blueprint.Robots[0].CanMake(next.Resources);
-                    // next.Adjust(blueprint.Robots[0], r0);
-                    // newCheck.Add(next);
-                    for (var r3 = Math.Min(1,CanMake(blueprint.Robots[3],state)); r3 >= 0; r3--)
-                    {
-                        var withRobot3 = state - (r3 == 1 ? blueprint.Robots[3].Cost: 0);
-                        for (var r2 = Math.Min(minute < 21 ? 1 : 0,CanMake(blueprint.Robots[2],withRobot3)); r2 >= 0; r2--)
-                        {
-                            if (r3 == 1) r2 = 0;
-                            var withRobot2 = withRobot3 - (r2 == 1 ? blueprint.Robots[2].Cost : 0);
-                            for (var r1 = Math.Min(minute < 19 ? 1 : 0,CanMake(blueprint.Robots[1],withRobot2)); r1 >= 0; r1--)
-                            {
-                                if (r3 == 1 || r2 == 1) r1 = 0;
-                                var withRobot1 = withRobot2 - (r1 == 1 ? blueprint.Robots[1].Cost : 0);
-                                for (var r0 = Math.Min(minute < 17 ? 1 : 0, CanMake(blueprint.Robots[0], withRobot1)); r0 >= 0; r0--)
-                                {
-                                    if (r3 == 1 || r2 == 1 || r1 == 1) r0 = 0;
-                                    var withRobot0 = withRobot1 - (r0 == 1 ? blueprint.Robots[0].Cost: 0);
-                                    var next = withRobot0 + (withRobot0 << 32);
-                                    next += ((ulong) r0) + (((ulong) r1) << 8) + ((ulong) r2 << 16) + ((ulong) r3 << 24);
-//                                    next.Resource = withRobot0;
+                    var nothing = state + (state << 32);
+                    newCheck.Add(nothing);
 
-                                        newCheck.Add(next);
-                                }
-                    
-                            }
+                    if (minute < 17)
+                    {
+                        if (CanMake(blueprint.Robots[0], state))
+                        {
+                            var next = state - blueprint.Robots[0].Cost;
+                            next += (next << 32);
+                            next += 1;
+                            newCheck.Add(next);
                         }
                     }
-                }
+
+                    if (minute < 19)
+                    {
+                        if (CanMake(blueprint.Robots[1], state))
+                        {
+                            var next = state - blueprint.Robots[1].Cost;
+                            next += (next << 32);
+                            next += 1 << 8;
+                            newCheck.Add(next);
+                        }
+                    }
+
+                    if (minute < 21)
+                    {
+                        if (CanMake(blueprint.Robots[2], state))
+                        {
+                            var next = state - blueprint.Robots[2].Cost;
+                            next += (next << 32);
+                            next += 1 << 16;
+                            newCheck.Add(next);
+                        }
+                    }
+
+                    if (CanMake(blueprint.Robots[3], state))
+                    {
+                        var next = state - blueprint.Robots[3].Cost;
+                        next += (next << 32);
+                        next += 1 << 24;
+                        newCheck.Add(next);
+                    }
+               }
             }
 
             toCheck = newCheck;
@@ -95,7 +103,7 @@ public class Day19
         return biggest;
     }
 
-    public int CanMake(Robot robot, ulong resource)
+    public bool CanMake(Robot robot, ulong resource)
     {
         for (var i = 0; i < 4; i++)
         {
@@ -103,10 +111,10 @@ public class Day19
             var a = resource & m;
             var b = robot.Cost & m;
             if (a < b)
-                return 0;
+                return false;
         }
 
-        return 1;
+        return true;
     }
 
     [DebuggerDisplay(

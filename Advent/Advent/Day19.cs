@@ -17,6 +17,7 @@ public class Day19
         foreach (var blueprint in blueprints)
         {
             var max = MaxGeode(blueprint, 24);
+            Console.WriteLine($"Blueprint {blueprint.Number} {max}");
             total += max * blueprint.Number;
         }
         return total;
@@ -33,6 +34,7 @@ public class Day19
         foreach (var blueprint in blueprints)
         {
             var max = MaxGeode(blueprint, 32);
+            Console.WriteLine($"Blueprint {blueprint.Number} {max}");
             total *= max;
         }
         return total;
@@ -51,6 +53,8 @@ public class Day19
         public Blueprint Blueprint;
         public int TotalMinutes;
         public int Max;
+
+        public int GeodeMax;
 
         public State(Blueprint blueprint, int totalMinutes)
         {
@@ -82,12 +86,16 @@ public class Day19
                 return max;
             }
 
-            var nothing = state + (state << 32);
-            max = Math.Max(max, AtState(minute + 1, nothing));
+            if (((state & OreMask) < Blueprint.MaxOre) | ((state & ClayMask) < Blueprint.MaxClay)
+                | ((state & ObsidianMask) < Blueprint.MaxObsidian))
+            {
+                var nothing = state + (state << 32);
+                max = Math.Max(max, AtState(minute + 1, nothing));
+            }
 
             if (minute < TotalMinutes - 7)
             {
-                if ((state & 255) < Blueprint.Max[0])
+                if ((state & 255) < Blueprint.MaxRobots[0])
                 {
                     if ((state & OreMask) >= Blueprint.Robots[0].Cost)
                     {
@@ -101,7 +109,7 @@ public class Day19
 
             if (minute < TotalMinutes - 5)
             {
-                if ((state & (255 << 8)) < Blueprint.Max[1])
+                if ((state & (255 << 8)) < Blueprint.MaxRobots[1])
                 {
                     if ((state & OreMask) >= Blueprint.Robots[1].Cost)
                     {
@@ -115,7 +123,7 @@ public class Day19
 
             if (minute < TotalMinutes - 3)
             {
-                if ((state & (255 << 16)) < Blueprint.Max[2])
+                if ((state & (255 << 16)) < Blueprint.MaxRobots[2])
                 {
                     if((state & OreMask) >= (Blueprint.Robots[2].Cost & OreMask)
                        && (state & ClayMask) >= (Blueprint.Robots[2].Cost & ClayMask))
@@ -163,7 +171,7 @@ public class Day19
 
         if (minute < totalMinutes - 7)
         {
-            if ((state & 255) < blueprint.Max[0])
+            if ((state & 255) < blueprint.MaxRobots[0])
             {
                 if (CanMake(blueprint.Robots[0], state))
                 {
@@ -177,7 +185,7 @@ public class Day19
 
         if (minute < totalMinutes - 5)
         {
-            if ((state & (255 << 8)) < blueprint.Max[1])
+            if ((state & (255 << 8)) < blueprint.MaxRobots[1])
             {
                 if (CanMake(blueprint.Robots[1], state))
                 {
@@ -191,7 +199,7 @@ public class Day19
 
         if (minute < totalMinutes - 3)
         {
-            if ((state & (255 << 16)) < blueprint.Max[2])
+            if ((state & (255 << 16)) < blueprint.MaxRobots[2])
             {
                 if (CanMake(blueprint.Robots[2], state))
                 {
@@ -240,7 +248,7 @@ public class Day19
 
                     if (minute < totalMinutes - 7)
                     {
-                        if ((state & 255) < blueprint.Max[0])
+                        if ((state & 255) < blueprint.MaxRobots[0])
                         {
                             if (CanMake(blueprint.Robots[0], state))
                             {
@@ -254,7 +262,7 @@ public class Day19
 
                     if (minute < totalMinutes - 5)
                     {
-                        if ((state & (255 << 8)) < blueprint.Max[1])
+                        if ((state & (255 << 8)) < blueprint.MaxRobots[1])
                         {
                             if (CanMake(blueprint.Robots[1], state))
                             {
@@ -268,7 +276,7 @@ public class Day19
 
                     if (minute < totalMinutes - 3)
                     {
-                        if ((state & (255 << 16)) < blueprint.Max[2])
+                        if ((state & (255 << 16)) < blueprint.MaxRobots[2])
                         {
                             if (CanMake(blueprint.Robots[2], state))
                             {
@@ -314,7 +322,10 @@ public class Day19
     {
         public Robot[] Robots;
         public int Number;
-        public uint[] Max;
+        public uint[] MaxRobots;
+        public ulong MaxOre;
+        public ulong MaxClay;
+        public ulong MaxObsidian;
 
         public Blueprint(string input)
         {
@@ -322,11 +333,21 @@ public class Day19
             var split = input.Split("Each ");
             Robots = split.Skip(1).Select(r => new Robot(r)).ToArray();
 
-            Max = new uint[4];
+            MaxRobots = new uint[4];
 
-            Max[0] = ((uint) Math.Max(Robots[1].Costs[0], Math.Max(Robots[2].Costs[0], Robots[3].Costs[0])));
-            Max[1] = ((uint) Robots[2].Costs[1]) << 8;
-            Max[2] = ((uint) Robots[3].Costs[2]) << 16;
+            MaxRobots[0] = ((uint) Math.Max(Robots[1].Costs[0], Math.Max(Robots[2].Costs[0], Robots[3].Costs[0])));
+            MaxRobots[1] = ((uint) Robots[2].Costs[1]) << 8;
+            MaxRobots[2] = ((uint) Robots[3].Costs[2]) << 16;
+
+            MaxOre = ((ulong) Math.Max(Math.Max(Robots[0].Costs[0], Robots[1].Costs[0]),
+                Math.Max(Robots[2].Costs[0], Robots[3].Costs[0]))) +99;
+            MaxOre <<= 32;
+
+            MaxClay = ((ulong) Robots[2].Costs[1]);
+            MaxClay <<= (32 + 8);
+            
+            MaxObsidian = ((ulong) Robots[3].Costs[2]);
+            MaxObsidian <<= (32 + 16);
             // for (var i = 0; i < 3; i++)
             // {
             //     Max[i] = ((uint) Robots.Max(r => r.Costs[i])) << (i * 8);

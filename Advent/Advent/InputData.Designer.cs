@@ -817,5 +817,17 @@ namespace Advent {
                 return ResourceManager.GetString("Day18Lava", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 4 ore. Each obsidian robot costs 4 ore and 17 clay. Each geode robot costs 4 ore and 20 obsidian.
+        ///Blueprint 2: Each ore robot costs 3 ore. Each clay robot costs 3 ore. Each obsidian robot costs 2 ore and 12 clay. Each geode robot costs 2 ore and 10 obsidian.
+        ///Blueprint 3: Each ore robot costs 3 ore. Each clay robot costs 3 ore. Each obsidian robot costs 2 ore and 20 clay. Each geode robot costs 3 ore and 18 obsidian.
+        ///Blueprint 4: Each ore robo [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day19Robots {
+            get {
+                return ResourceManager.GetString("Day19Robots", resourceCulture);
+            }
+        }
     }
 }

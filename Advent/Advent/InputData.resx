@@ -72,4 +72,7 @@
     <data name="Day18Lava" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>DataFiles\Day18Lava.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
     </data>
+    <data name="Day19Robots" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>DataFiles\Day19Robots.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+    </data>
 </root>

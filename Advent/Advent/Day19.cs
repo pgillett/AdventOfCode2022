@@ -71,6 +71,16 @@ public class Day19
             }
 
             var max = 0;
+            
+            if((state & OreMask) >= (Blueprint.Robots[3].Cost & OreMask)
+               && (state & ObsidianMask) >= (Blueprint.Robots[3].Cost & ObsidianMask))
+            {
+                var next = state - Blueprint.Robots[3].Cost;
+                next += next << 32;
+                next += 1 << 24;
+                max = Math.Max(max, AtState(minute + 1, next));
+                return max;
+            }
 
             var nothing = state + (state << 32);
             max = Math.Max(max, AtState(minute + 1, nothing));
@@ -118,14 +128,7 @@ public class Day19
                 }
             }
             
-            if((state & OreMask) >= (Blueprint.Robots[3].Cost & OreMask)
-               && (state & ObsidianMask) >= (Blueprint.Robots[3].Cost & ObsidianMask))
-            {
-                var next = state - Blueprint.Robots[3].Cost;
-                next += next << 32;
-                next += 1 << 24;
-                max = Math.Max(max, AtState(minute + 1, next));
-            }
+           
 
             return max;
         }
@@ -321,10 +324,13 @@ public class Day19
 
             Max = new uint[4];
 
-            for (var i = 0; i < 3; i++)
-            {
-                Max[i] = ((uint) Robots.Max(r => r.Costs[i])) << (i * 8);
-            }
+            Max[0] = ((uint) Math.Max(Robots[1].Costs[0], Math.Max(Robots[2].Costs[0], Robots[3].Costs[0])));
+            Max[1] = ((uint) Robots[2].Costs[1]) << 8;
+            Max[2] = ((uint) Robots[3].Costs[2]) << 16;
+            // for (var i = 0; i < 3; i++)
+            // {
+            //     Max[i] = ((uint) Robots.Max(r => r.Costs[i])) << (i * 8);
+            // }
         }
     }
 

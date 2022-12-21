@@ -20,13 +20,13 @@ public class Day21Test
     {
         var expectedResult = 152;
 
-        var actualResult = _day21.Answer(_input);
+        var actualResult = _day21.Root(_input);
 
         actualResult.Should().Be(expectedResult);
     }
 
     [TestMethod]
-    public void InputSlidingShouldBe301()
+    public void InputMeBe301()
     {
         var expectedResult = 301;
 

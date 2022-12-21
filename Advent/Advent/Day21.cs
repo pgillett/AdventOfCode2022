@@ -7,71 +7,30 @@ namespace Advent;
 
 public class Day21
 {
-    public long Answer(string input)
+    public long Root(string input)
     {
         var monkeys = input.Split(Environment.NewLine).Select(l => new Monkey(l))
             .ToDictionary(m => m.Name, m => m);
 
-        return monkeys["root"].Value(monkeys);
+        return monkeys["root"].Value(monkeys).Value;
     }
 
     public long Me(string input)
     {
         var monkeys = input.Split(Environment.NewLine).Select(l => new Monkey(l))
             .ToDictionary(m => m.Name, m => m);
-        
-        var humn = monkeys["humn"];
-        humn.LiteralValue = null;
+
+        monkeys["humn"].LiteralValue = null;
         var root = monkeys["root"];
 
-        long answer;
-        
-        try
+        var left = monkeys[root.Left].Value(monkeys);
+        if (left != null)
         {
-            var left = monkeys[root.Left].Value(monkeys);
-            answer = Solve(monkeys[root.Right], left, monkeys);
-        }
-        catch
-        {
-            var right = monkeys[root.Right].Value(monkeys);
-            answer = Solve(monkeys[root.Left], right, monkeys);
+            return monkeys[root.Right].Solve(left.Value, monkeys).Value;
         }
 
-        return answer;
-    }
-
-    public long Solve(Monkey monkey, long answer, Dictionary<string, Monkey> monkeys)
-    {
-        if (monkey.Name == "humn") return answer;
-
-        if (monkey.LiteralValue.HasValue) return monkey.LiteralValue.Value;
-
-        try
-        {
-            var left = monkeys[monkey.Left].Value(monkeys);
-            var target = monkey.Op switch
-            {
-                '+' => answer - left,
-                '-' => left - answer,
-                '*' => answer / left,
-                '/' => left / answer,
-                _ => throw new Exception()
-            };
-            return Solve(monkeys[monkey.Right], target, monkeys);
-        }
-        catch
-        {
-            var right = monkeys[monkey.Right].Value(monkeys);
-            var target = monkey.Op switch
-            {
-                '+' => answer - right,
-                '-' => answer + right,
-                '*' => answer / right,
-                '/' => answer * right,
-                _ => throw new Exception()
-            };
-            return Solve(monkeys[monkey.Left], target, monkeys);
-        }
+        var right = monkeys[root.Right].Value(monkeys);
+        return monkeys[root.Left].Solve(right.Value, monkeys).Value;
     }
 
     public class Monkey
@@ -100,10 +59,11 @@ public class Day21
             }
         }
 
-        public long Value(Dictionary<string, Monkey> monkeys)
+        public long? Value(Dictionary<string, Monkey> monkeys)
         {
             if (LiteralValue.HasValue) return LiteralValue.Value;
 
+            if (Left == null || Right == null) return null;
             var left = monkeys[Left].Value(monkeys);
             var right = monkeys[Right].Value(monkeys);
 
@@ -113,11 +73,47 @@ public class Day21
                 '-' => left -right,
                 '*' => left * right,
                 '/' => left / right,
-                _ => throw new Exception()
+                _ => null
             };
 
             LiteralValue = value;
             return value;
+        }
+        
+        public long? Solve(long answer, Dictionary<string, Monkey> monkeys)
+        {
+            if (Name == "humn") return answer;
+
+            if (LiteralValue.HasValue) return LiteralValue.Value;
+
+            if (Left == null || Right == null) return null;
+
+            var left = monkeys[Left].Value(monkeys);
+            if (left != null)
+            {
+                var target = Op switch
+                {
+                    '+' => answer - left.Value,
+                    '-' => left.Value - answer,
+                    '*' => answer / left.Value,
+                    '/' => left.Value / answer,
+                    _ => throw new Exception()
+                };
+                return monkeys[Right].Solve(target, monkeys);
+            }
+            else
+            {
+                var right = monkeys[Right].Value(monkeys).Value;
+                var target = Op switch
+                {
+                    '+' => answer - right,
+                    '-' => answer + right,
+                    '*' => answer / right,
+                    '/' => answer * right,
+                    _ => throw new Exception()
+                };
+                return monkeys[Left].Solve(target, monkeys);
+            }
         }
     }
 }

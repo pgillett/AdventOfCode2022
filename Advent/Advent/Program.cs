@@ -159,8 +159,8 @@ class Program
         if (IncludeDay(21))
         {
             var day21 = new Day21();
-            Output(20, 1, "Open sides", day21.Answer(InputData.Day21Monkey));
-            Output(20, 1, "Open sides", day21.Me(InputData.Day21Monkey));
+            Output(21, 1, "Root", day21.Root(InputData.Day21Monkey));
+            Output(21, 2, "Me", day21.Me(InputData.Day21Monkey));
         }
 
         Console.WriteLine();

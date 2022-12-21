@@ -829,5 +829,145 @@ namespace Advent {
                 return ResourceManager.GetString("Day19Robots", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3948
+        ///8349
+        ///-4882
+        ///-1065
+        ///9657
+        ///-7890
+        ///2902
+        ///4136
+        ///369
+        ///-2026
+        ///7899
+        ///6971
+        ///8465
+        ///-3249
+        ///1569
+        ///158
+        ///-7433
+        ///1502
+        ///-8019
+        ///5490
+        ///-9467
+        ///8375
+        ///5796
+        ///-2925
+        ///-5870
+        ///917
+        ///-67
+        ///9033
+        ///-2897
+        ///-1464
+        ///4789
+        ///-7483
+        ///-5
+        ///8954
+        ///1296
+        ///-9920
+        ///-5776
+        ///7037
+        ///-5211
+        ///-5785
+        ///179
+        ///-4519
+        ///340
+        ///-139
+        ///9417
+        ///9013
+        ///6984
+        ///-6111
+        ///-4459
+        ///6347
+        ///5516
+        ///-558
+        ///-7963
+        ///-1988
+        ///-3518
+        ///8174
+        ///-1819
+        ///-3340
+        ///8771
+        ///429
+        ///-9583
+        ///-7735
+        ///-121
+        ///-2672
+        ///4127
+        ///-2566
+        ///8332
+        ///-2793
+        ///195
+        ///5344
+        ///-106
+        ///-847
+        ///-1564
+        ///8469
+        ///-6412
+        ///-7046
+        ///5567
+        ///-9020
+        ///1994
+        ///4743
+        ///1867
+        ///-3 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day20Mixing {
+            get {
+                return ResourceManager.GetString("Day20Mixing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to cjdb: 3
+        ///hhfs: 5
+        ///jvjn: 4
+        ///tjzm: bngm * mrfm
+        ///mbbs: 2
+        ///dzlq: tcdz * bjdj
+        ///htzp: 3
+        ///hsmn: 5
+        ///sblh: 2
+        ///pghw: 5
+        ///pqtp: vtcr * bcts
+        ///mvgz: 2
+        ///sszn: 3
+        ///zqlr: nlfq * htfq
+        ///djsb: 2
+        ///vccw: zzsz * thbz
+        ///tlvg: fncr + glvj
+        ///grql: nqch * jhmw
+        ///rngv: 4
+        ///prjv: 2
+        ///rmdl: lzdr * qpzh
+        ///pdqm: 2
+        ///jrpn: zcnv + pgqr
+        ///llzf: 2
+        ///bzfp: qbwz + zsts
+        ///bvsf: rbcd + npcs
+        ///jmpm: 3
+        ///zgrs: 15
+        ///lcrs: 5
+        ///cqcc: swtj + wnzt
+        ///vhts: 2
+        ///pbgz: 1
+        ///mqpb: 2
+        ///jzcf: 2
+        ///sfls: 10
+        ///cnhh: 8
+        ///clsh: mcwb * jfrq
+        ///cqch: 4
+        ///brvd: 19
+        ///fprh: 2
+        ///dccm: gbhn / tczb
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day21Monkey {
+            get {
+                return ResourceManager.GetString("Day21Monkey", resourceCulture);
+            }
+        }
     }
 }

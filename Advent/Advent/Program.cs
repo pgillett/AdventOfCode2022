@@ -7,7 +7,7 @@ class Program
 {
     private static Stopwatch _stopwatch;
 
-    private const int From = 19;
+    private const int From = 21;
     private const int To = 25;
 
     private static readonly int[,] Times = new int[25, 2];
@@ -147,6 +147,20 @@ class Program
             var day19 = new Day19();
             Output(18, 1, "Open sides", day19.QualityLevels(InputData.Day19Robots));
             Output(18, 2, "Open sides", day19.QualityLevels3(InputData.Day19Robots));
+        }
+        
+        if (IncludeDay(20))
+        {
+            var day20 = new Day20();
+            Output(20, 1, "Open sides", day20.Method(InputData.Day20Mixing));
+            Output(20, 1, "Open sides", day20.Method2(InputData.Day20Mixing));
+        }
+
+        if (IncludeDay(21))
+        {
+            var day21 = new Day21();
+            Output(20, 1, "Open sides", day21.Answer(InputData.Day21Monkey));
+            Output(20, 1, "Open sides", day21.Me(InputData.Day21Monkey));
         }
 
         Console.WriteLine();

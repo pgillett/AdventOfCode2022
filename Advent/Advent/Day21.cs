@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace Advent;
@@ -9,16 +8,14 @@ public class Day21
 {
     public long Root(string input)
     {
-        var monkeys = input.Split(Environment.NewLine).Select(l => new Monkey(l))
-            .ToDictionary(m => m.Name, m => m);
+        var monkeys = Parse(input);
 
         return monkeys["root"].Value(monkeys).Value;
     }
 
     public long Me(string input)
     {
-        var monkeys = input.Split(Environment.NewLine).Select(l => new Monkey(l))
-            .ToDictionary(m => m.Name, m => m);
+        var monkeys = Parse(input);
 
         monkeys["humn"].LiteralValue = null;
         var root = monkeys["root"];
@@ -32,6 +29,10 @@ public class Day21
         var right = monkeys[root.Right].Value(monkeys);
         return monkeys[root.Left].Solve(right.Value, monkeys).Value;
     }
+
+    public Dictionary<string, Monkey> Parse(string input) => 
+        input.Split(Environment.NewLine).Select(l => new Monkey(l))
+        .ToDictionary(m => m.Name, m => m);
 
     public class Monkey
     {

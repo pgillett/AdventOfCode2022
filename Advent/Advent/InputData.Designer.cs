@@ -969,5 +969,17 @@ namespace Advent {
                 return ResourceManager.GetString("Day21Monkey", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to                                                   ............#..#..................#............#.......#..............#.............................
+        ///                                                  ...#...#...#.......#............................#.#.....#..#...........................#......#.....
+        ///                                                  #.....#....#....#...............#..#.........#..................#......................#.##......#..
+        ///                                                  ...#.. [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Day22Password {
+            get {
+                return ResourceManager.GetString("Day22Password", resourceCulture);
+            }
+        }
     }
 }

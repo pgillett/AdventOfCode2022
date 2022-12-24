@@ -170,6 +170,13 @@ class Program
             Output(22, 2, "Password 3d", day22.Password3d(InputData.Day22Password));
         }
 
+        if (IncludeDay(23))
+        {
+            var day23 = new Day23();
+            Output(23, 1, "Password", day23.Method(InputData.Day23Diffusion));
+            Output(23, 2, "Password 3d", day23.Method3(InputData.Day23Diffusion));
+        }
+
         Console.WriteLine();
         Console.WriteLine();
 

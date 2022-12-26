@@ -997,5 +997,18 @@ namespace Advent {
                 return ResourceManager.GetString("Day23Diffusion", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #.########################################################################################################################
+        ///#&lt;.^&gt;&lt;&gt;^&gt;&gt;&gt;^&lt;v^^v&gt;v^vv&lt;v&gt;.&lt;v^&gt;&lt;&gt;^&lt;^.^&gt;^&gt;&lt;^^v^&gt;v^v&gt;&gt;v&gt;&lt;v&lt;^vv&gt;&gt;&lt;^.v&lt;^vv.v&lt;^&lt;^&lt;vv&lt;&lt;vv&gt;..v^&gt;&lt;&gt;..&lt;&lt;^.&lt;v^^^vv&gt;.&lt;&lt;^v&gt;^&lt;&lt;v&lt;^v^v&gt;&gt;#
+        ///#&gt;^&gt;&lt;.^&lt;^v&lt;&gt;^&lt;&lt;vv^&lt;^&lt;&gt;&gt;^v&lt;^vvv&gt;vvv&lt;&gt;&lt;v^v&lt;&gt;&gt;&lt;&lt;^&gt;.v.&gt;^v^^&gt;&lt;^&lt;v^v^v^.&gt;v^&lt;vvv^^.vv^^v^&lt;^^v&gt;&gt;&gt;&gt;.v^^.&gt;v&gt;^&lt;&lt;v&gt;vv&lt;&lt;v&gt;.&gt;&gt;&gt;&lt;^&gt;&gt;&gt;&gt;v&gt;#
+        ///#&gt;v&gt;^^^^&gt;.^.v&lt;&gt;&gt;&gt;v&gt;v^^v.&gt;v^&gt;&gt;&lt;..v&lt;^vv^v^&gt;&lt;&lt;&gt;v&lt;^&lt;vv&gt;&gt;^.&lt;.&gt;&gt;&gt;v&lt;&gt;&gt;^^v&gt;&gt;^&lt;^v^&lt;^v^v&lt;v^&gt;^.vvvv.&lt;&lt;.&gt;^&lt;^^&gt;&gt;v&gt;v&lt;&gt;&gt;&lt;^^&gt;v^^&lt;v^.vv&lt;&gt;&gt;#
+        ///#&gt;&lt;&lt;&lt;&gt;v^^v&gt;v&gt;v&gt;^ [rest of string was truncated]&....
+        /// </summary>
+        internal static string Day24Blizzard {
+            get {
+                return ResourceManager.GetString("Day24Blizzard", resourceCulture);
+            }
+        }
     }
 }

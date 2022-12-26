@@ -7,7 +7,7 @@ class Program
 {
     private static Stopwatch _stopwatch;
 
-    private const int From = 22;
+    private const int From = 24;
     private const int To = 25;
 
     private static readonly int[,] Times = new int[25, 2];
@@ -175,6 +175,13 @@ class Program
             var day23 = new Day23();
             Output(23, 1, "Password", day23.Method(InputData.Day23Diffusion));
             Output(23, 2, "Password 3d", day23.Method3(InputData.Day23Diffusion));
+        }
+
+        if (IncludeDay(24))
+        {
+            var day24 = new Day24();
+            Output(24, 1, "Password", day24.Method(InputData.Day24Blizzard));
+            Output(24, 2, "Password 3d", day24.Method2(InputData.Day24Blizzard));
         }
 
         Console.WriteLine();

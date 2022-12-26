@@ -87,4 +87,7 @@
     <data name="Day23Diffusion" type="System.Resources.ResXFileRef, System.Windows.Forms">
         <value>DataFiles\Day23Diffusion.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
     </data>
+    <data name="Day24Blizzard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+        <value>DataFiles\Day24Blizzard.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+    </data>
 </root>

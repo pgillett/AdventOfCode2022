@@ -184,6 +184,13 @@ class Program
             Output(24, 2, "Password 3d", day24.Method2(InputData.Day24Blizzard));
         }
 
+        if (IncludeDay(25))
+        {
+            var day25 = new Day25();
+            Output(25, 1, "Password", day25.Method(InputData.Day25Snafu));
+            //Output(25, 2, "Password 3d", day25.Method2(InputData.Day24Blizzard));
+        }
+
         Console.WriteLine();
         Console.WriteLine();
 

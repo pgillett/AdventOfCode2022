@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Advent;
@@ -16,7 +15,6 @@ public class Day19
         foreach (var blueprint in blueprints)
         {
             var max = MaxGeode(blueprint, 24);
-            Console.WriteLine($"Blueprint {blueprint.Number} {max}");
             total += max * blueprint.Number;
         }
         return total;
@@ -33,7 +31,6 @@ public class Day19
         foreach (var blueprint in blueprints)
         {
             var max = MaxGeode(blueprint, 32);
-            Console.WriteLine($"Blueprint {blueprint.Number} {max}");
             total *= max;
         }
         return total;
@@ -43,8 +40,6 @@ public class Day19
     {
         var state = new State(blueprint, totalMinutes);
         return state.Max;
-//        var startState = (ulong) 1;
-//        return AtState(blueprint, 0, startState, totalMinutes);
     }
 
     public class State
@@ -181,7 +176,7 @@ public class Day19
             {
                 minute++;
 
-                state = state + (state << 32);
+                state += (state << 32);
 
                 if (CanOre(state - forOre))
                 {
@@ -214,179 +209,7 @@ public class Day19
             return false;
         }
     }
-
-    public int AtState(Blueprint blueprint, int minute, ulong state, int totalMinutes)
-    {
-        if (minute == totalMinutes - 1)
-        {
-            var resource = state + (state << 32);
-            var geode = resource >> (24 + 32);
-            return (int) geode;
-        }
-
-        var max = 0;
-        
-        if (CanMake(blueprint.Robots[3], state))
-        {
-            var next = state - blueprint.Robots[3].Cost;
-            next += (next << 32);
-            next += 1 << 24;
-            max = Math.Max(max, AtState(blueprint, minute + 1, next, totalMinutes));
-            return max;
-        }
-
-        var nothing = state + (state << 32);
-        max = Math.Max(max, AtState(blueprint, minute + 1, nothing, totalMinutes));
-
-        if (minute < totalMinutes - 7)
-        {
-            if ((state & 255) < blueprint.MaxRobots[0])
-            {
-                if (CanMake(blueprint.Robots[0], state))
-                {
-                    var next = state - blueprint.Robots[0].Cost;
-                    next += (next << 32);
-                    next += 1;
-                    max = Math.Max(max, AtState(blueprint, minute + 1, next, totalMinutes));
-                }
-            }
-        }
-
-        if (minute < totalMinutes - 5)
-        {
-            if ((state & (255 << 8)) < blueprint.MaxRobots[1])
-            {
-                if (CanMake(blueprint.Robots[1], state))
-                {
-                    var next = state - blueprint.Robots[1].Cost;
-                    next += (next << 32);
-                    next += 1 << 8;
-                    max = Math.Max(max, AtState(blueprint, minute + 1, next, totalMinutes));
-                }
-            }
-        }
-
-        if (minute < totalMinutes - 3)
-        {
-            if ((state & (255 << 16)) < blueprint.MaxRobots[2])
-            {
-                if (CanMake(blueprint.Robots[2], state))
-                {
-                    var next = state - blueprint.Robots[2].Cost;
-                    next += (next << 32);
-                    next += 1 << 16;
-                    max = Math.Max(max, AtState(blueprint, minute + 1, next, totalMinutes));
-                }
-            }
-        }
-
-        return max;
-    }
-
-    public int MaxGeode2(Blueprint blueprint, int totalMinutes)
-    {
-        var startState = (ulong)1;
-
-        var toCheck = new List<ulong>();
-        toCheck.Add(startState);
-
-        var biggest = 0;
-
-        var maxGeode = 0;
-        var maxObsidian = 0;
-        
-        for(var minute = 0; minute < totalMinutes; minute++)
-        {
-            var newCheck = new List<ulong>();
-
-            foreach (var state in toCheck)
-            {
-                if (minute == totalMinutes - 1)
-                {
-                    var resource = state + (state << 32);
-                    var geode = resource >> (24+32);
-                    if ((int) geode < 0)
-                        throw new Exception(geode.ToString());
-                    if ((int)geode > biggest)
-                        biggest = (int)geode;
-                }
-                else
-                {
-                    var nothing = state + (state << 32);
-                    newCheck.Add(nothing);
-
-                    if (minute < totalMinutes - 7)
-                    {
-                        if ((state & 255) < blueprint.MaxRobots[0])
-                        {
-                            if (CanMake(blueprint.Robots[0], state))
-                            {
-                                var next = state - blueprint.Robots[0].Cost;
-                                next += (next << 32);
-                                next += 1;
-                                newCheck.Add(next);
-                            }
-                        }
-                    }
-
-                    if (minute < totalMinutes - 5)
-                    {
-                        if ((state & (255 << 8)) < blueprint.MaxRobots[1])
-                        {
-                            if (CanMake(blueprint.Robots[1], state))
-                            {
-                                var next = state - blueprint.Robots[1].Cost;
-                                next += (next << 32);
-                                next += 1 << 8;
-                                newCheck.Add(next);
-                            }
-                        }
-                    }
-
-                    if (minute < totalMinutes - 3)
-                    {
-                        if ((state & (255 << 16)) < blueprint.MaxRobots[2])
-                        {
-                            if (CanMake(blueprint.Robots[2], state))
-                            {
-                                var next = state - blueprint.Robots[2].Cost;
-                                next += (next << 32);
-                                next += 1 << 16;
-                                newCheck.Add(next);
-                            }
-                        }
-                    }
-
-                    if (CanMake(blueprint.Robots[3], state))
-                    {
-                        var next = state - blueprint.Robots[3].Cost;
-                        next += (next << 32);
-                        next += 1 << 24;
-                        newCheck.Add(next);
-                    }
-               }
-            }
-
-            toCheck = newCheck;
-        }
-        
-        return biggest;
-    }
-
-    public bool CanMake(Robot robot, ulong resource)
-    {
-        for (var i = 0; i < 3; i++)
-        {
-            var m = ((ulong) 255) << (i * 8 + 32);
-            var a = resource & m;
-            var b = robot.Cost & m;
-            if (a < b)
-                return false;
-        }
-
-        return true;
-    }
-
+    
     public class Blueprint
     {
         public Robot[] Robots;
@@ -417,10 +240,6 @@ public class Day19
             
             MaxObsidian = ((ulong) Robots[3].Costs[2]);
             MaxObsidian <<= (32 + 16);
-            // for (var i = 0; i < 3; i++)
-            // {
-            //     Max[i] = ((uint) Robots.Max(r => r.Costs[i])) << (i * 8);
-            // }
         }
     }
 
@@ -428,12 +247,10 @@ public class Day19
     {
         public int[] Costs = new int[4];
         public ulong Cost = 0;
-        public Mineral Type;
 
         public Robot(string input)
         {
             var type = Word(input);
-            Type = StringToMineral(type);
             var rest = input.Substring(type.Length).Replace(" robot costs ", "");
             rest = Word(rest, '.');
             var costs = rest.Split(" and ");
@@ -441,7 +258,7 @@ public class Day19
             {
                 var part = cost.Split(' ');
                 var mineral = StringToMineral(part[1]);
-                Costs[(int)mineral] = int.Parse(part[0]);
+                Costs[mineral] = int.Parse(part[0]);
             }
 
             for (var i = 0; i < 3; i++)
@@ -449,39 +266,17 @@ public class Day19
                 Cost += ((ulong) Costs[i]) << (i * 8 + 32);
             }
         }
-
-        public int CanMake(uint resource)
-        {
-  //          var min = int.MaxValue;
-            for (var i = 0; i < 4; i++)
-            {
-                var a = (int)(resource >> (i * 8)) & 255;
-                if (a < Costs[i])
-                    return 0;
-            }
-
-            return 1;
-                // if (Costs[i] > 0)
-                // {
-                //     var a = (int)(resource >> (i * 8)) & 255;
-                //     min = Math.Min(min, a / Costs[i]);
-                // }
-                //
-//            return min;
-        }
     }
 
     public static string Word(string input, char delimiter = ' ') =>
         input.Substring(0, input.IndexOf(delimiter));
     
-    public enum Mineral { ore, clay, obsidian, geode }
-
-    public static Mineral StringToMineral(string input) =>
+    public static int StringToMineral(string input) =>
         input switch
         {
-            "ore" => Mineral.ore,
-            "clay" => Mineral.clay,
-            "obsidian" => Mineral.obsidian,
-            "geode" => Mineral.geode
+            "ore" => 0,
+            "clay" => 1,
+            "obsidian" => 2,
+            "geode" => 3
         };
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace Advent;
@@ -44,8 +43,8 @@ public class Day19
     {
         var state = new State(blueprint, totalMinutes);
         return state.Max;
-        var startState = (ulong) 1;
-        return AtState(blueprint, 0, startState, totalMinutes);
+//        var startState = (ulong) 1;
+//        return AtState(blueprint, 0, startState, totalMinutes);
     }
 
     public class State
@@ -67,17 +66,24 @@ public class Day19
 
         public int AtState(int minute, ulong state)
         {
+            var resource = state + (state << 32);
+            var geode = resource >> (24 + 32);
+
+            GeodeMax = Math.Max(GeodeMax, (int) geode);
+
             if (minute == TotalMinutes - 1)
             {
-                var resource = state + (state << 32);
-                var geode = resource >> (24 + 32);
                 return (int) geode;
             }
 
+            if (!Estimate(minute, state, GeodeMax))
+            {
+                return 0;
+            }
+
             var max = 0;
-            
-            if((state & OreMask) >= (Blueprint.Robots[3].Cost & OreMask)
-               && (state & ObsidianMask) >= (Blueprint.Robots[3].Cost & ObsidianMask))
+
+            if (CanGeode(state))
             {
                 var next = state - Blueprint.Robots[3].Cost;
                 next += next << 32;
@@ -86,18 +92,11 @@ public class Day19
                 return max;
             }
 
-            if (((state & OreMask) < Blueprint.MaxOre) | ((state & ClayMask) < Blueprint.MaxClay)
-                | ((state & ObsidianMask) < Blueprint.MaxObsidian))
-            {
-                var nothing = state + (state << 32);
-                max = Math.Max(max, AtState(minute + 1, nothing));
-            }
-
             if (minute < TotalMinutes - 7)
             {
                 if ((state & 255) < Blueprint.MaxRobots[0])
                 {
-                    if ((state & OreMask) >= Blueprint.Robots[0].Cost)
+                    if (CanOre(state))
                     {
                         var next = state - Blueprint.Robots[0].Cost;
                         next += next << 32;
@@ -111,7 +110,7 @@ public class Day19
             {
                 if ((state & (255 << 8)) < Blueprint.MaxRobots[1])
                 {
-                    if ((state & OreMask) >= Blueprint.Robots[1].Cost)
+                    if (CanClay(state))
                     {
                         var next = state - Blueprint.Robots[1].Cost;
                         next += next << 32;
@@ -125,8 +124,7 @@ public class Day19
             {
                 if ((state & (255 << 16)) < Blueprint.MaxRobots[2])
                 {
-                    if((state & OreMask) >= (Blueprint.Robots[2].Cost & OreMask)
-                       && (state & ClayMask) >= (Blueprint.Robots[2].Cost & ClayMask))
+                    if (CanObsidian(state))
                     {
                         var next = state - Blueprint.Robots[2].Cost;
                         next += next << 32;
@@ -135,15 +133,86 @@ public class Day19
                     }
                 }
             }
-            
-           
+
+            if (((state & OreMask) < Blueprint.MaxOre) | ((state & ClayMask) < Blueprint.MaxClay)
+                                                       | ((state & ObsidianMask) < Blueprint.MaxObsidian))
+            {
+                var nothing = state + (state << 32);
+                max = Math.Max(max, AtState(minute + 1, nothing));
+            }
 
             return max;
+        }
+
+        public bool CanOre(ulong state)
+        {
+            return (state & OreMask) >= Blueprint.Robots[0].Cost;
+        }
+
+        public bool CanClay(ulong state)
+        {
+            return (state & OreMask) >= Blueprint.Robots[1].Cost;
+        }
+
+        public bool CanObsidian(ulong state)
+        {
+            return (state & OreMask) >= (Blueprint.Robots[2].Cost & OreMask)
+                   && (state & ClayMask) >= (Blueprint.Robots[2].Cost & ClayMask);
+        }
+
+        public bool CanGeode(ulong state)
+        {
+            return (state & OreMask) >= (Blueprint.Robots[3].Cost & OreMask)
+                   && (state & ObsidianMask) >= (Blueprint.Robots[3].Cost & ObsidianMask);
         }
         
         public const ulong OreMask = ((ulong)255) << 32;
         public const ulong ClayMask = ((ulong)255) << (32 + 8);
         public const ulong ObsidianMask = ((ulong)255) << (32 + 16);
+        
+        public bool Estimate(int minute, ulong state, int maxGeode)
+        {
+            var forOre = (ulong)0;
+            var forClay = (ulong)0;
+            var forObsidian = (ulong)0;
+            var forGeode = (ulong)0;
+            
+            while (minute < TotalMinutes)
+            {
+                minute++;
+
+                state = state + (state << 32);
+
+                if (CanOre(state - forOre))
+                {
+                    forOre += Blueprint.Robots[0].Cost;
+                    state += 1;
+                }
+
+                if (CanClay(state - forClay))
+                {
+                    forClay += Blueprint.Robots[1].Cost;
+                    state += 1 << 8;
+                }
+
+                if (CanObsidian(state - forObsidian))
+                {
+                    forObsidian += Blueprint.Robots[2].Cost;
+                    state += 1 << 16;
+                }
+
+                if (CanGeode(state - forGeode))
+                {
+                    forGeode += Blueprint.Robots[3].Cost;
+                    state += 1 << 24;
+                }
+
+                var geode = (int) (state >> (32 + 24));
+                if (geode > maxGeode) return true;
+            }
+
+            return false;
+        }
     }
 
     public int AtState(Blueprint blueprint, int minute, ulong state, int totalMinutes)

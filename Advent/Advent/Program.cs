@@ -7,8 +7,8 @@ class Program
 {
     private static Stopwatch _stopwatch;
 
-    private const int From = 24;
-    private const int To = 25;
+    private const int From = 19;
+    private const int To = 19;
 
     private static readonly int[,] Times = new int[25, 2];
 

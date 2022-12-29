@@ -20,17 +20,17 @@ public class Day20Test
     {
         var expectedResult = 3;
 
-        var actualResult = _day20.Method(_input);
+        var actualResult = _day20.GroveCoordinate(_input);
 
         actualResult.Should().Be(expectedResult);
     }
 
     [TestMethod]
-    public void InputSlidingShouldBe45000()
+    public void InputWithDecryptionShouldBe45000()
     {
         var expectedResult = 1623178306L;
 
-        var actualResult = _day20.Method2(_input);
+        var actualResult = _day20.GroveDecryption(_input);
 
         actualResult.Should().Be(expectedResult);
     }

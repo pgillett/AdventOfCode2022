@@ -26,7 +26,7 @@ public class Day18Test
     }
 
     [TestMethod]
-    public void InputSlidingShouldBe58()
+    public void InputVisibleShouldBe58()
     {
         var expectedResult = 58;
 

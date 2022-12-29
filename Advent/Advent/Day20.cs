@@ -6,9 +6,9 @@ namespace Advent;
 
 public class Day20
 {
-    public long Method2(string input) => Mix(input, 811589153L, 10);
+    public long GroveDecryption(string input) => Mix(input, 811589153L, 10);
 
-    public long Method(string input) => Mix(input, 1, 1);
+    public long GroveCoordinate(string input) => Mix(input, 1, 1);
 
     public long Mix(string input, long encryption, int number)
     {

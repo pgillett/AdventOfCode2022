@@ -26,7 +26,7 @@ public class Day21Test
     }
 
     [TestMethod]
-    public void InputMeBe301()
+    public void InputMeShouldBe301()
     {
         var expectedResult = 301;
 

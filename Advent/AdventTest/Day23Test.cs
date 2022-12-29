@@ -20,17 +20,17 @@ public class Day23Test
     {
         var expectedResult = 110;
 
-        var actualResult = _day23.Method(_input);
+        var actualResult = _day23.EmptyGround(_input);
 
         actualResult.Should().Be(expectedResult);
     }
 
     [TestMethod]
-    public void InputSlidingShouldBe20()
+    public void InputNoMovesShouldBe20()
     {
         var expectedResult = 20;
 
-        var actualResult = _day23.Method3(_input);
+        var actualResult = _day23.NoMoves(_input);
 
         actualResult.Should().Be(expectedResult);
     }

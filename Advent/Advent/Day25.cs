@@ -5,7 +5,7 @@ namespace Advent;
 
 public class Day25
 {
-    public string Method(string input)
+    public string Snafu(string input)
     {
         var numbers = input.Split(Environment.NewLine).Select(Parse).ToArray();
 

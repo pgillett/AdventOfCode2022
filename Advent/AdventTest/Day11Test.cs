@@ -26,7 +26,7 @@ public class Day11Test
     }
 
     [TestMethod]
-    public void InputSlidingShouldBe2713310158()
+    public void InputNoWorryShouldBe2713310158()
     {
         var expectedResult = 2713310158;
 

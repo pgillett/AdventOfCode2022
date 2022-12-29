@@ -26,7 +26,7 @@ public class Day22Test
     }
 
     [TestMethod]
-    public void InputSlidingShouldBe5031()
+    public void InputIn3dShouldBe5031()
     {
         var expectedResult = 5031;
 

@@ -6,8 +6,8 @@ namespace Advent;
 
 public class Day24
 {
-    public int Method(string input) => MethodMain(input, false);
-    public int Method2(string input) => MethodMain(input, true);
+    public int Steps(string input) => MethodMain(input, false);
+    public int StepsBackBack(string input) => MethodMain(input, true);
     public int MethodMain(string input, bool both)
     {
         var lines = input.Split(Environment.NewLine);

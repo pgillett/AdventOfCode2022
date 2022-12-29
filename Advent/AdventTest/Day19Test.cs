@@ -26,7 +26,7 @@ public class Day19Test
     }
 
     [TestMethod]
-    public void InputLongerShouldBe45000()
+    public void InputLongerShouldBe61x56()
     {
         var expectedResult = 62 * 56;
 

@@ -26,7 +26,7 @@ public class Day01Test
     }
 
     [TestMethod]
-    public void InputSlidingShouldBe45000()
+    public void InputTop3ShouldBe45000()
     {
         var expectedResult = 45000;
 

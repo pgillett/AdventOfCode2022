@@ -6,9 +6,9 @@ namespace Advent;
 
 public class Day23
 {
-    public int Method(string input) => Method2(input, 10, false);
+    public int EmptyGround(string input) => Method2(input, 10, false);
 
-    public int Method3(string input) => Method2(input, 999999999, true);
+    public int NoMoves(string input) => Method2(input, 999999999, true);
 
     public int Method2(string input, int rounds, bool stop)
     {

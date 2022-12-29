@@ -20,17 +20,17 @@ public class Day24Test
     {
         var expectedResult = 18;
 
-        var actualResult = _day24.Method(_input);
+        var actualResult = _day24.Steps(_input);
 
         actualResult.Should().Be(expectedResult);
     }
 
     [TestMethod]
-    public void InputSlidingShouldBe54()
+    public void InputThereBackThereShouldBe54()
     {
         var expectedResult = 54;
 
-        var actualResult = _day24.Method2(_input);
+        var actualResult = _day24.StepsBackBack(_input);
 
         actualResult.Should().Be(expectedResult);
     }

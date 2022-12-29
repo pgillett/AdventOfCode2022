@@ -7,8 +7,8 @@ class Program
 {
     private static Stopwatch _stopwatch;
 
-    private const int From = 19;
-    private const int To = 19;
+    private const int From = 1;
+    private const int To = 25;
 
     private static readonly int[,] Times = new int[25, 2];
 
@@ -27,7 +27,7 @@ class Program
         {
             var day2 = new Day02();
             Output(2, 1, "Score", day2.Score(InputData.Day02Rock));
-            Output(2, 2, "Score", day2.ScoreForceOutcome(InputData.Day02Rock));
+            Output(2, 2, "Score forced", day2.ScoreForceOutcome(InputData.Day02Rock));
         }
         
         if (IncludeDay(3))
@@ -132,28 +132,28 @@ class Program
         {
             var day17 = new Day17();
             Output(17, 1, "Height after 2022", day17.UnitsTall(InputData.Day17Jets));
-            Output(17, 1, "Height after a trillion", day17.Trillion(InputData.Day17Jets));
+            Output(17, 2, "Height after a trillion", day17.Trillion(InputData.Day17Jets));
         }
 
         if (IncludeDay(18))
         {
             var day18 = new Day18();
             Output(18, 1, "Open sides", day18.OpenSides(InputData.Day18Lava));
-            Output(18, 1, "Visible sides", day18.VisibleSides(InputData.Day18Lava));
+            Output(18, 2, "Visible sides", day18.VisibleSides(InputData.Day18Lava));
         }
         
         if (IncludeDay(19))
         {
             var day19 = new Day19();
-            Output(18, 1, "Open sides", day19.QualityLevels(InputData.Day19Robots));
-            Output(18, 2, "Open sides", day19.QualityLevels3(InputData.Day19Robots));
+            Output(19, 1, "Quality level", day19.QualityLevels(InputData.Day19Robots));
+            Output(19, 2, "Quality level 3", day19.QualityLevels3(InputData.Day19Robots));
         }
         
         if (IncludeDay(20))
         {
             var day20 = new Day20();
-            Output(20, 1, "Open sides", day20.Method(InputData.Day20Mixing));
-            Output(20, 1, "Open sides", day20.Method2(InputData.Day20Mixing));
+            Output(20, 1, "Grove coordinate", day20.GroveCoordinate(InputData.Day20Mixing));
+            Output(20, 2, "With decryption", day20.GroveDecryption(InputData.Day20Mixing));
         }
 
         if (IncludeDay(21))
@@ -173,22 +173,21 @@ class Program
         if (IncludeDay(23))
         {
             var day23 = new Day23();
-            Output(23, 1, "Password", day23.Method(InputData.Day23Diffusion));
-            Output(23, 2, "Password 3d", day23.Method3(InputData.Day23Diffusion));
+            Output(23, 1, "Empty ground", day23.EmptyGround(InputData.Day23Diffusion));
+            Output(23, 2, "No moveds", day23.NoMoves(InputData.Day23Diffusion));
         }
 
         if (IncludeDay(24))
         {
             var day24 = new Day24();
-            Output(24, 1, "Password", day24.Method(InputData.Day24Blizzard));
-            Output(24, 2, "Password 3d", day24.Method2(InputData.Day24Blizzard));
+            Output(24, 1, "Steps", day24.Steps(InputData.Day24Blizzard));
+            Output(24, 2, "Steps, back, back", day24.StepsBackBack(InputData.Day24Blizzard));
         }
 
         if (IncludeDay(25))
         {
             var day25 = new Day25();
-            Output(25, 1, "Password", day25.Method(InputData.Day25Snafu));
-            //Output(25, 2, "Password 3d", day25.Method2(InputData.Day24Blizzard));
+            Output(25, 1, "Snafu", day25.Snafu(InputData.Day25Snafu));
         }
 
         Console.WriteLine();

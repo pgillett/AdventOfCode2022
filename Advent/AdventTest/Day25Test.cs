@@ -16,11 +16,11 @@ public class Day25Test
     }
 
     [TestMethod]
-    public void InputDataShouldBe24000()
+    public void InputDataShouldBeResult()
     {
         var expectedResult = "2=-1=0";
 
-        var actualResult = _day25.Method(_input);
+        var actualResult = _day25.Snafu(_input);
 
         actualResult.Should().Be(expectedResult);
     }
